@@ -7,27 +7,29 @@ export default class SubjectList extends Component {
 		super(props);
 		this.state = {edit: -1};
 	}
-	
+
 	toggleEdit(id = -1) {
 		this.setState({edit: id});
 	}
+
+	createSubject() {
+		const {subjects, updateSubjects} = this.props;
+		updateSubjects([...subjects, {title: '', id: Date.now()}]);
+	}
+
 	render() {
 		const {intervals, subjects, unit, range, updateSubjects, updateIntervals} = this.props;
 		const {edit} = this.props;
 		return (
 			<div className="subject-list">
-				{subjects.map(s => edit === s.id
-					? <Subject
-						data={s}
+				<button onClick={this.createSubject.bind(this)}>New Subject</button>
+				{subjects.map(s => edit !== s.id
+					? <Subject key={s.id} data={s} unit={unit}
 						intervals={intervals.filter(i => i.subjectId === s.id)}
-						unit={unit}
 						toggleEdit={this.toggleEdit.bind(this)}
 						/>
-					: <SubjectForm
-						data={s}
+					: <SubjectForm key={s.id} data={s} unit={unit} range={range}
 						intervals={intervals.filter(i => i.subjectId === s.id)}
-						unit={unit}
-						range={range}
 						updateSubjects={updateSubjects}
 						updateIntervals={updateIntervals}
 						toggleEdit={this.toggleEdit.bind(this)}
