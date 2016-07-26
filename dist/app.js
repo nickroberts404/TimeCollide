@@ -41137,8 +41137,8 @@ Config.propTypes = {
 	updateIntervals: _react.PropTypes.func.isRequired
 };
 
-},{"./SetupForm.js":181,"./SubjectList.js":184,"react":175}],178:[function(require,module,exports){
-"use strict";
+},{"./SetupForm.js":183,"./SubjectList.js":186,"react":175}],178:[function(require,module,exports){
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
@@ -41146,7 +41146,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -41168,9 +41168,13 @@ var Interval = function (_Component) {
 	}
 
 	_createClass(Interval, [{
-		key: "render",
+		key: 'render',
 		value: function render() {
-			return _react2.default.createElement("div", { className: "interval" });
+			return _react2.default.createElement(
+				'div',
+				{ className: 'interval' },
+				'interval'
+			);
 		}
 	}]);
 
@@ -41183,10 +41187,148 @@ exports.default = Interval;
 Interval.propTypes = {
 	id: _react.PropTypes.number.isRequired,
 	range: _react.PropTypes.arrayOf(_react.PropTypes.number).isRequired,
+	unit: _react.PropTypes.oneOf(['day', 'hour', 'minute']).isRequired,
 	subjectId: _react.PropTypes.number.isRequired
 };
 
 },{"react":175}],179:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require("react");
+
+var _react2 = _interopRequireDefault(_react);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var IntervalForm = function (_Component) {
+	_inherits(IntervalForm, _Component);
+
+	function IntervalForm() {
+		_classCallCheck(this, IntervalForm);
+
+		return _possibleConstructorReturn(this, Object.getPrototypeOf(IntervalForm).apply(this, arguments));
+	}
+
+	_createClass(IntervalForm, [{
+		key: "render",
+		value: function render() {
+			return _react2.default.createElement(
+				"div",
+				{ className: "interval-form" },
+				"interval-form"
+			);
+		}
+	}]);
+
+	return IntervalForm;
+}(_react.Component);
+
+exports.default = IntervalForm;
+
+},{"react":175}],180:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _IntervalForm = require('./IntervalForm.js');
+
+var _IntervalForm2 = _interopRequireDefault(_IntervalForm);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var IntervalFormList = function (_Component) {
+	_inherits(IntervalFormList, _Component);
+
+	function IntervalFormList() {
+		_classCallCheck(this, IntervalFormList);
+
+		return _possibleConstructorReturn(this, Object.getPrototypeOf(IntervalFormList).apply(this, arguments));
+	}
+
+	_createClass(IntervalFormList, [{
+		key: 'createInterval',
+		value: function createInterval() {
+			var _props = this.props;
+			var subjectId = _props.subjectId;
+			var range = _props.range;
+			var intervals = _props.intervals;
+			var updateIntervals = _props.updateIntervals;
+
+			var id = Date.now();
+			updateIntervals([].concat(_toConsumableArray(intervals), [{ id: id, subjectId: subjectId, range: [] }]));
+		}
+	}, {
+		key: 'render',
+		value: function render() {
+			var _props2 = this.props;
+			var intervals = _props2.intervals;
+			var unit = _props2.unit;
+			var updateIntervals = _props2.updateIntervals;
+
+			return _react2.default.createElement(
+				'div',
+				{ className: 'interval-list' },
+				_react2.default.createElement(
+					'button',
+					{ onClick: this.createInterval.bind(this) },
+					'New Interval'
+				),
+				intervals.map(function (i) {
+					return _react2.default.createElement(_IntervalForm2.default, {
+						key: i.id,
+						id: i.id,
+						range: i.range,
+						subjectId: i.subjectId,
+						updateIntervals: updateIntervals
+					});
+				})
+			);
+		}
+	}]);
+
+	return IntervalFormList;
+}(_react.Component);
+
+exports.default = IntervalFormList;
+
+
+IntervalFormList.propTypes = {
+	subjectId: _react.PropTypes.number.isRequired,
+	intervals: _react.PropTypes.arrayOf(_react.PropTypes.object).isRequired,
+	unit: _react.PropTypes.oneOf(['day', 'hour', 'minute']).isRequired,
+	range: _react.PropTypes.arrayOf(_react.PropTypes.number).isRequired,
+	updateIntervals: _react.PropTypes.func.isRequired
+};
+
+},{"./IntervalForm.js":179,"react":175}],181:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41234,6 +41376,7 @@ var IntervalList = function (_Component) {
 					return _react2.default.createElement(_Interval2.default, {
 						key: i.id,
 						id: i.id,
+						unit: unit,
 						range: i.range,
 						subjectId: i.subjectId
 					});
@@ -41253,7 +41396,7 @@ IntervalList.propTypes = {
 	unit: _react.PropTypes.oneOf(['day', 'hour', 'minute']).isRequired
 };
 
-},{"./Interval.js":178,"react":175}],180:[function(require,module,exports){
+},{"./Interval.js":178,"react":175}],182:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41333,7 +41476,7 @@ RangeInput.propTypes = {
 	updateRange: _react.PropTypes.func.isRequired
 };
 
-},{"moment":28,"react":175,"react-datepicker":31}],181:[function(require,module,exports){
+},{"moment":28,"react":175,"react-datepicker":31}],183:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41409,7 +41552,7 @@ SetupForm.propTypes = {
 	updateRange: _react.PropTypes.func.isRequired
 };
 
-},{"./RangeInput.js":180,"./UnitInput.js":185,"react":175}],182:[function(require,module,exports){
+},{"./RangeInput.js":182,"./UnitInput.js":187,"react":175}],184:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41483,8 +41626,8 @@ Subject.propTypes = {
 	toggleEdit: _react.PropTypes.func.isRequired
 };
 
-},{"./IntervalList.js":179,"react":175}],183:[function(require,module,exports){
-"use strict";
+},{"./IntervalList.js":181,"react":175}],185:[function(require,module,exports){
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
@@ -41492,9 +41635,13 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _IntervalFormList = require('./IntervalFormList.js');
+
+var _IntervalFormList2 = _interopRequireDefault(_IntervalFormList);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -41507,19 +41654,41 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var SubjectForm = function (_Component) {
 	_inherits(SubjectForm, _Component);
 
-	function SubjectForm() {
+	function SubjectForm(props) {
 		_classCallCheck(this, SubjectForm);
 
-		return _possibleConstructorReturn(this, Object.getPrototypeOf(SubjectForm).apply(this, arguments));
+		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SubjectForm).call(this, props));
+
+		_this.state = { title: props.data.title };
+		return _this;
 	}
 
 	_createClass(SubjectForm, [{
-		key: "render",
+		key: 'render',
 		value: function render() {
+			var _this2 = this;
+
+			var _props = this.props;
+			var data = _props.data;
+			var intervals = _props.intervals;
+			var unit = _props.unit;
+			var range = _props.range;
+			var updateIntervals = _props.updateIntervals;
+			var title = this.state.title;
+
 			return _react2.default.createElement(
-				"div",
-				{ className: "subject-form" },
-				"Edit Mode!"
+				'div',
+				{ className: 'subject-form' },
+				_react2.default.createElement('input', { value: title, onChange: function onChange(e) {
+						return _this2.setState({ title: e.target.value });
+					} }),
+				_react2.default.createElement(_IntervalFormList2.default, {
+					subjectId: data.id,
+					intervals: intervals,
+					unit: unit,
+					range: range,
+					updateIntervals: updateIntervals
+				})
 			);
 		}
 	}]);
@@ -41540,7 +41709,7 @@ SubjectForm.propTypes = {
 	toggleEdit: _react.PropTypes.func.isRequired
 };
 
-},{"react":175}],184:[function(require,module,exports){
+},{"./IntervalFormList.js":180,"react":175}],186:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41657,7 +41826,7 @@ SubjectList.propTypes = {
 	updateIntervals: _react.PropTypes.func.isRequired
 };
 
-},{"./Subject.js":182,"./SubjectForm.js":183,"react":175}],185:[function(require,module,exports){
+},{"./Subject.js":184,"./SubjectForm.js":185,"react":175}],187:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41731,7 +41900,7 @@ UnitInput.propTypes = {
 	updateUnit: _react.PropTypes.func.isRequired
 };
 
-},{"react":175}],186:[function(require,module,exports){
+},{"react":175}],188:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -41748,4 +41917,4 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 (0, _reactDom.render)(_react2.default.createElement(_app2.default, null), document.getElementById('app'));
 
-},{"./app.js":176,"react":175,"react-dom":32}]},{},[186]);
+},{"./app.js":176,"react":175,"react-dom":32}]},{},[188]);

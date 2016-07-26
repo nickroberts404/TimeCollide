@@ -9,6 +9,7 @@ export default class IntervalList extends Component {
 				{intervals.map(i => <Interval
 					key={i.id}
 					id={i.id}
+					unit={unit}
 					range={i.range}
 					subjectId={i.subjectId}
 					/>

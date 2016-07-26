@@ -1,10 +1,23 @@
 import React, {Component, PropTypes} from 'react';
-
+import IntervalFormList from './IntervalFormList.js';
 export default class SubjectForm extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {title: props.data.title};
+	}
 	render() {
+		const {data, intervals, unit, range, updateIntervals} = this.props;
+		const {title} = this.state;
 		return (
 			<div className="subject-form">
-				{"Edit Mode!"}
+				<input value={title} onChange={e => this.setState({title: e.target.value})} />
+				<IntervalFormList
+					subjectId={data.id}
+					intervals={intervals}
+					unit={unit}
+					range={range}
+					updateIntervals={updateIntervals}
+				/>
 			</div>
 		)
 	}
