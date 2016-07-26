@@ -10,3 +10,10 @@ export default class Subject extends Component {
 		)
 	}
 }
+
+Subject.propTypes = {
+	data: PropTypes.object.isRequired,
+	intervals: PropTypes.arrayOf(PropTypes.object).isRequired,
+	unit: PropTypes.oneOf(['day', 'hour', 'minute']).isRequired,
+	toggleEdit: PropTypes.func.isRequired,
+}

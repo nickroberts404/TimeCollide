@@ -41431,8 +41431,16 @@ var Subject = function (_Component) {
 
 exports.default = Subject;
 
+
+Subject.propTypes = {
+	data: _react.PropTypes.object.isRequired,
+	intervals: _react.PropTypes.arrayOf(_react.PropTypes.object).isRequired,
+	unit: _react.PropTypes.oneOf(['day', 'hour', 'minute']).isRequired,
+	toggleEdit: _react.PropTypes.func.isRequired
+};
+
 },{"./IntervalList.js":179,"react":175}],183:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
@@ -41440,7 +41448,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -41462,9 +41470,9 @@ var SubjectForm = function (_Component) {
 	}
 
 	_createClass(SubjectForm, [{
-		key: "render",
+		key: 'render',
 		value: function render() {
-			return _react2.default.createElement("div", { className: "subject-form" });
+			return _react2.default.createElement('div', { className: 'subject-form' });
 		}
 	}]);
 
@@ -41472,6 +41480,17 @@ var SubjectForm = function (_Component) {
 }(_react.Component);
 
 exports.default = SubjectForm;
+
+
+SubjectForm.propTypes = {
+	data: _react.PropTypes.object.isRequired,
+	intervals: _react.PropTypes.arrayOf(_react.PropTypes.object).isRequired,
+	unit: _react.PropTypes.oneOf(['day', 'hour', 'minute']).isRequired,
+	range: _react.PropTypes.arrayOf(_react.PropTypes.number).isRequired,
+	updateSubjects: _react.PropTypes.func.isRequired,
+	updateIntervals: _react.PropTypes.func.isRequired,
+	toggleEdit: _react.PropTypes.func.isRequired
+};
 
 },{"react":175}],184:[function(require,module,exports){
 'use strict';
@@ -41515,8 +41534,17 @@ var SubjectList = function (_Component) {
 	}
 
 	_createClass(SubjectList, [{
+		key: 'toggleEdit',
+		value: function toggleEdit() {
+			var id = arguments.length <= 0 || arguments[0] === undefined ? -1 : arguments[0];
+
+			this.setState({ edit: id });
+		}
+	}, {
 		key: 'render',
 		value: function render() {
+			var _this2 = this;
+
 			var _props = this.props;
 			var intervals = _props.intervals;
 			var subjects = _props.subjects;
@@ -41530,7 +41558,24 @@ var SubjectList = function (_Component) {
 				'div',
 				{ className: 'subject-list' },
 				subjects.map(function (s) {
-					return edit === s.id ? _react2.default.createElement(_Subject2.default, null) : _react2.default.createElement(_SubjectForm2.default, null);
+					return edit === s.id ? _react2.default.createElement(_Subject2.default, {
+						data: s,
+						intervals: intervals.filter(function (i) {
+							return i.subjectId === s.id;
+						}),
+						unit: unit,
+						toggleEdit: _this2.toggleEdit.bind(_this2)
+					}) : _react2.default.createElement(_SubjectForm2.default, {
+						data: s,
+						intervals: intervals.filter(function (i) {
+							return i.subjectId === s.id;
+						}),
+						unit: unit,
+						range: range,
+						updateSubjects: updateSubjects,
+						updateIntervals: updateIntervals,
+						toggleEdit: _this2.toggleEdit.bind(_this2)
+					});
 				})
 			);
 		}

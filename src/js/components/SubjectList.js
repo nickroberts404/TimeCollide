@@ -8,14 +8,30 @@ export default class SubjectList extends Component {
 		this.state = {edit: -1};
 	}
 	
+	toggleEdit(id = -1) {
+		this.setState({edit: id});
+	}
 	render() {
 		const {intervals, subjects, unit, range, updateSubjects, updateIntervals} = this.props;
 		const {edit} = this.props;
 		return (
 			<div className="subject-list">
 				{subjects.map(s => edit === s.id
-					? <Subject />
-					: <SubjectForm />
+					? <Subject
+						data={s}
+						intervals={intervals.filter(i => i.subjectId === s.id)}
+						unit={unit}
+						toggleEdit={this.toggleEdit.bind(this)}
+						/>
+					: <SubjectForm
+						data={s}
+						intervals={intervals.filter(i => i.subjectId === s.id)}
+						unit={unit}
+						range={range}
+						updateSubjects={updateSubjects}
+						updateIntervals={updateIntervals}
+						toggleEdit={this.toggleEdit.bind(this)}
+						/>
 				)}
 			</div>
 		)
