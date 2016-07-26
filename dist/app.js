@@ -41494,10 +41494,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 var SubjectList = function (_Component) {
 	_inherits(SubjectList, _Component);
 
-	function SubjectList() {
+	function SubjectList(props) {
 		_classCallCheck(this, SubjectList);
 
-		return _possibleConstructorReturn(this, Object.getPrototypeOf(SubjectList).apply(this, arguments));
+		var _this = _possibleConstructorReturn(this, Object.getPrototypeOf(SubjectList).call(this, props));
+
+		_this.state = { edit: -1 };
+		return _this;
 	}
 
 	_createClass(SubjectList, [{
@@ -41511,6 +41514,16 @@ var SubjectList = function (_Component) {
 }(_react.Component);
 
 exports.default = SubjectList;
+
+
+SubjectList.propTypes = {
+	intervals: _react.PropTypes.arrayOf(_react.PropTypes.object).isRequired,
+	subjects: _react.PropTypes.arrayOf(_react.PropTypes.object).isRequired,
+	unit: _react.PropTypes.oneOf(['day', 'hour', 'minute']).isRequired,
+	range: _react.PropTypes.arrayOf(_react.PropTypes.number).isRequired,
+	updateSubjects: _react.PropTypes.func.isRequired,
+	updateIntervals: _react.PropTypes.func.isRequired
+};
 
 },{"./Subject.js":182,"./SubjectForm.js":183,"react":175}],185:[function(require,module,exports){
 'use strict';
