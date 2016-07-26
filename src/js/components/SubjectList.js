@@ -7,11 +7,16 @@ export default class SubjectList extends Component {
 		super(props);
 		this.state = {edit: -1};
 	}
-
+	
 	render() {
+		const {intervals, subjects, unit, range, updateSubjects, updateIntervals} = this.props;
+		const {edit} = this.props;
 		return (
 			<div className="subject-list">
-				
+				{subjects.map(s => edit === s.id
+					? <Subject />
+					: <SubjectForm />
+				)}
 			</div>
 		)
 	}

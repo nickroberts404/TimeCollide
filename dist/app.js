@@ -41517,7 +41517,22 @@ var SubjectList = function (_Component) {
 	_createClass(SubjectList, [{
 		key: 'render',
 		value: function render() {
-			return _react2.default.createElement('div', { className: 'subject-list' });
+			var _props = this.props;
+			var intervals = _props.intervals;
+			var subjects = _props.subjects;
+			var unit = _props.unit;
+			var range = _props.range;
+			var updateSubjects = _props.updateSubjects;
+			var updateIntervals = _props.updateIntervals;
+			var edit = this.props.edit;
+
+			return _react2.default.createElement(
+				'div',
+				{ className: 'subject-list' },
+				subjects.map(function (s) {
+					return edit === s.id ? _react2.default.createElement(_Subject2.default, null) : _react2.default.createElement(_SubjectForm2.default, null);
+				})
+			);
 		}
 	}]);
 
