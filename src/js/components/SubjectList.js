@@ -14,7 +14,9 @@ export default class SubjectList extends Component {
 
 	createSubject() {
 		const {subjects, updateSubjects} = this.props;
-		updateSubjects([...subjects, {title: '', id: Date.now()}]);
+		const id = Date.now();
+		updateSubjects([...subjects, {title: '', id}]);
+		this.toggleEdit(id);
 	}
 
 	render() {

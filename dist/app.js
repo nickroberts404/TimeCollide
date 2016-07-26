@@ -41597,7 +41597,9 @@ var SubjectList = function (_Component) {
 			var subjects = _props.subjects;
 			var updateSubjects = _props.updateSubjects;
 
-			updateSubjects([].concat(_toConsumableArray(subjects), [{ title: '', id: Date.now() }]));
+			var id = Date.now();
+			updateSubjects([].concat(_toConsumableArray(subjects), [{ title: '', id: id }]));
+			this.toggleEdit(id);
 		}
 	}, {
 		key: 'render',
