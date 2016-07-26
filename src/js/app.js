@@ -12,8 +12,24 @@ export default class App extends Component {
 			range: [d3.timeDay.floor(new Date).getTime(), d3.timeDay.offset(d3.timeDay.ceil(new Date), 7).getTime()]
 		}
 	}
+	
+	updateUnit(unit) {
+		this.setState(unit);
+	}
+
+	updateRange(range) {
+		this.setState(range);
+	}
 
 	render() {
-		return <Config />
+		const {intervals, subjects, unit, range} = this.state;
+		return <Config
+			intervals={intervals}
+			subjects={subjects}
+			unit={unit}
+			range={range}
+			updateUnit={this.updateUnit.bind(this)}
+			updateRange={this.updateRange.bind(this)}
+			/>
 	}
 }

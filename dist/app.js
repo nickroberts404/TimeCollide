@@ -36660,9 +36660,32 @@ var App = function (_Component) {
 	}
 
 	_createClass(App, [{
+		key: 'updateUnit',
+		value: function updateUnit(unit) {
+			this.setState(unit);
+		}
+	}, {
+		key: 'updateRange',
+		value: function updateRange(range) {
+			this.setState(range);
+		}
+	}, {
 		key: 'render',
 		value: function render() {
-			return _react2.default.createElement(_Config2.default, null);
+			var _state = this.state;
+			var intervals = _state.intervals;
+			var subjects = _state.subjects;
+			var unit = _state.unit;
+			var range = _state.range;
+
+			return _react2.default.createElement(_Config2.default, {
+				intervals: intervals,
+				subjects: subjects,
+				unit: unit,
+				range: range,
+				updateUnit: this.updateUnit.bind(this),
+				updateRange: this.updateRange.bind(this)
+			});
 		}
 	}]);
 
@@ -36730,8 +36753,10 @@ exports.default = Config;
 Config.propTypes = {
 	intervals: _react.PropTypes.arrayOf(_react.PropTypes.object).isRequired,
 	subjects: _react.PropTypes.arrayOf(_react.PropTypes.object).isRequired,
-	unit: _react.PropTypes.oneOf(['day', 'hour', 'minute']),
-	range: _react.PropTypes.arrayOf(_react.PropTypes.number).isRequired
+	unit: _react.PropTypes.oneOf(['day', 'hour', 'minute']).isRequired,
+	range: _react.PropTypes.arrayOf(_react.PropTypes.number).isRequired,
+	updateUnit: _react.PropTypes.func.isRequired,
+	updateRange: _react.PropTypes.func.isRequired
 };
 
 },{"./SetupForm.js":177,"./SubjectList.js":180,"react":172}],175:[function(require,module,exports){

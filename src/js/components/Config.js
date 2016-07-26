@@ -16,6 +16,8 @@ export default class Config extends Component {
 Config.propTypes = {
 	intervals: PropTypes.arrayOf(PropTypes.object).isRequired,
 	subjects: PropTypes.arrayOf(PropTypes.object).isRequired,
-	unit: PropTypes.oneOf(['day', 'hour', 'minute']),
-	range: PropTypes.arrayOf(PropTypes.number).isRequired
+	unit: PropTypes.oneOf(['day', 'hour', 'minute']).isRequired,
+	range: PropTypes.arrayOf(PropTypes.number).isRequired,
+	updateUnit: PropTypes.func.isRequired,
+	updateRange: PropTypes.func.isRequired,
 }
