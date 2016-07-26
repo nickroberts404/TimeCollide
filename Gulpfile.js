@@ -18,7 +18,7 @@ var chalk 		= require('chalk');
 // This task bundles our scripts using browserify.
 gulp.task('scripts', ()=> {
 	return browserify('./src/js/index.js')
-		.transform(babel, {presets: ["es2015"]})
+		.transform(babel, {presets: [ "react", "es2015"]})
 		.bundle()
 		.on('error', handleError)
 		.pipe(source('app.js'))
