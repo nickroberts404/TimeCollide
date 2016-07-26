@@ -41440,6 +41440,7 @@ var RangeInput = function (_Component) {
 			var _props = this.props;
 			var range = _props.range;
 			var updateRange = _props.updateRange;
+			var includeDates = _props.includeDates;
 
 			var start = (0, _moment2.default)(range[0]);
 			var end = (0, _moment2.default)(range[1]);
@@ -41450,6 +41451,7 @@ var RangeInput = function (_Component) {
 					selected: start,
 					startDate: start,
 					endDate: end,
+					includeDates: includeDates || null,
 					onChange: function onChange(t) {
 						return updateRange([t.valueOf(), range[1]]);
 					} }),
@@ -41457,6 +41459,7 @@ var RangeInput = function (_Component) {
 					selected: end,
 					startDate: start,
 					endDate: end,
+					includeDates: includeDates || null,
 					onChange: function onChange(t) {
 						return updateRange([range[0], t.valueOf()]);
 					} })
@@ -41473,7 +41476,9 @@ exports.default = RangeInput;
 RangeInput.propTypes = {
 	unit: _react.PropTypes.oneOf(['day', 'hour', 'minute']).isRequired,
 	range: _react.PropTypes.arrayOf(_react.PropTypes.number).isRequired,
-	updateRange: _react.PropTypes.func.isRequired
+	updateRange: _react.PropTypes.func.isRequired,
+	includeDates: _react.PropTypes.array
+
 };
 
 },{"moment":28,"react":175,"react-datepicker":31}],183:[function(require,module,exports){
