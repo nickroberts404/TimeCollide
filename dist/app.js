@@ -41005,10 +41005,21 @@ var App = function (_Component) {
 	}, {
 		key: 'updateRange',
 		value: function updateRange(range) {
+			// If start time is greater than end time, reverse the two. 
 			range = range.sort(function (t1, t2) {
 				return t1 - t2;
 			});
 			this.setState({ range: range });
+		}
+	}, {
+		key: 'updateSubjects',
+		value: function updateSubjects(subjects) {
+			this.setState({ subjects: subjects });
+		}
+	}, {
+		key: 'updateIntervals',
+		value: function updateIntervals(intervals) {
+			this.setState({ intervals: intervals });
 		}
 	}, {
 		key: 'render',
@@ -41025,7 +41036,9 @@ var App = function (_Component) {
 				unit: unit,
 				range: range,
 				updateUnit: this.updateUnit.bind(this),
-				updateRange: this.updateRange.bind(this)
+				updateRange: this.updateRange.bind(this),
+				updateSubjects: this.updateSubjects.bind(this),
+				updateIntervals: this.updateIntervals.bind(this)
 			});
 		}
 	}]);
@@ -41108,7 +41121,9 @@ Config.propTypes = {
 	unit: _react.PropTypes.oneOf(['day', 'hour', 'minute']).isRequired,
 	range: _react.PropTypes.arrayOf(_react.PropTypes.number).isRequired,
 	updateUnit: _react.PropTypes.func.isRequired,
-	updateRange: _react.PropTypes.func.isRequired
+	updateRange: _react.PropTypes.func.isRequired,
+	updateSubjects: _react.PropTypes.func.isRequired,
+	updateIntervals: _react.PropTypes.func.isRequired
 };
 
 },{"./SetupForm.js":181,"./SubjectList.js":184,"react":175}],178:[function(require,module,exports){

@@ -26,4 +26,6 @@ Config.propTypes = {
 	range: PropTypes.arrayOf(PropTypes.number).isRequired,
 	updateUnit: PropTypes.func.isRequired,
 	updateRange: PropTypes.func.isRequired,
+	updateSubjects: PropTypes.func.isRequired,
+	updateIntervals: PropTypes.func.isRequired,
 }

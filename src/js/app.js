@@ -18,8 +18,17 @@ export default class App extends Component {
 	}
 
 	updateRange(range) {
+		// If start time is greater than end time, reverse the two. 
 		range = range.sort((t1, t2) => t1 - t2);
 		this.setState({range});
+	}
+
+	updateSubjects(subjects) {
+		this.setState({subjects});
+	}
+
+	updateIntervals(intervals) {
+		this.setState({intervals});
 	}
 
 	render() {
@@ -31,6 +40,8 @@ export default class App extends Component {
 			range={range}
 			updateUnit={this.updateUnit.bind(this)}
 			updateRange={this.updateRange.bind(this)}
+			updateSubjects={this.updateSubjects.bind(this)}
+			updateIntervals={this.updateIntervals.bind(this)}
 			/>
 	}
 }
