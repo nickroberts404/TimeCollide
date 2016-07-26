@@ -36735,10 +36735,21 @@ var Config = function (_Component) {
 	_createClass(Config, [{
 		key: 'render',
 		value: function render() {
+			var _props = this.props;
+			var unit = _props.unit;
+			var range = _props.range;
+			var updateUnit = _props.updateUnit;
+			var updateRange = _props.updateRange;
+
 			return _react2.default.createElement(
 				'div',
 				{ className: 'config' },
-				_react2.default.createElement(_SetupForm2.default, null),
+				_react2.default.createElement(_SetupForm2.default, {
+					unit: unit,
+					range: range,
+					updateUnit: updateUnit,
+					updateRange: updateRange
+				}),
 				_react2.default.createElement(_SubjectList2.default, null)
 			);
 		}
@@ -36937,11 +36948,24 @@ var SetupForm = function (_Component) {
 	_createClass(SetupForm, [{
 		key: 'render',
 		value: function render() {
+			var _props = this.props;
+			var unit = _props.unit;
+			var range = _props.range;
+			var updateUnit = _props.updateUnit;
+			var updateRange = _props.updateRange;
+
 			return _react2.default.createElement(
 				'div',
 				{ className: 'setup-form' },
-				_react2.default.createElement(_UnitInput2.default, null),
-				_react2.default.createElement(_RangeInput2.default, null)
+				_react2.default.createElement(_UnitInput2.default, {
+					unit: unit,
+					updateUnit: updateUnit
+				}),
+				_react2.default.createElement(_RangeInput2.default, {
+					unit: unit,
+					range: range,
+					updateRange: updateRange
+				})
 			);
 		}
 	}]);

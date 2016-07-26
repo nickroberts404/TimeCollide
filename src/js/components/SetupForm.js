@@ -3,10 +3,18 @@ import UnitInput from './UnitInput.js';
 import RangeInput from './RangeInput.js';
 export default class SetupForm extends Component {
 	render() {
+		const {unit, range, updateUnit, updateRange} = this.props;
 		return (
 			<div className="setup-form">
-				<UnitInput />
-				<RangeInput />
+				<UnitInput 
+					unit={unit} 
+					updateUnit={updateUnit}
+				/>
+				<RangeInput
+					unit={unit}
+					range={range}
+					updateRange={updateRange}
+				/>
 			</div>
 		)
 	}

@@ -4,9 +4,15 @@ import SubjectList from './SubjectList.js';
 
 export default class Config extends Component {
 	render() {
+		const {unit, range, updateUnit, updateRange} = this.props;
 		return (
 			<div className="config">
-				<SetupForm />
+				<SetupForm 
+					unit={unit}
+					range={range}
+					updateUnit={updateUnit}
+					updateRange={updateRange}
+				/>
 				<SubjectList />
 			</div>
 		)
