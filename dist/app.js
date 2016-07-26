@@ -41090,10 +41090,14 @@ var Config = function (_Component) {
 		key: 'render',
 		value: function render() {
 			var _props = this.props;
+			var subjects = _props.subjects;
+			var intervals = _props.intervals;
 			var unit = _props.unit;
 			var range = _props.range;
 			var updateUnit = _props.updateUnit;
 			var updateRange = _props.updateRange;
+			var updateIntervals = _props.updateIntervals;
+			var updateSubjects = _props.updateSubjects;
 
 			return _react2.default.createElement(
 				'div',
@@ -41104,7 +41108,14 @@ var Config = function (_Component) {
 					updateUnit: updateUnit,
 					updateRange: updateRange
 				}),
-				_react2.default.createElement(_SubjectList2.default, null)
+				_react2.default.createElement(_SubjectList2.default, {
+					intervals: intervals,
+					subjects: subjects,
+					unit: unit,
+					range: range,
+					updateSubjects: updateSubjects,
+					updateIntervals: updateIntervals
+				})
 			);
 		}
 	}]);

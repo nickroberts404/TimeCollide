@@ -7,10 +7,11 @@ export default class SubjectList extends Component {
 		super(props);
 		this.state = {edit: -1};
 	}
-	
+
 	render() {
 		return (
 			<div className="subject-list">
+				
 			</div>
 		)
 	}
