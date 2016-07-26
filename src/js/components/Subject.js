@@ -3,13 +3,13 @@ import IntervalList from './IntervalList.js';
 
 export default class Subject extends Component {
 	render() {
-		const {data, toggleEdit} = this.props;
+		const {data, toggleEdit, intervals, unit} = this.props;
 		const {title, id} = data;
 		return (
 			<div className="subject">
 				{title || 'Untitled'}
 				<button onClick={() => toggleEdit(id)}>Edit</button>
-				<IntervalList />
+				<IntervalList intervals={intervals} unit={unit} />
 			</div>
 		)
 	}

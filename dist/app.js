@@ -41179,6 +41179,13 @@ var Interval = function (_Component) {
 
 exports.default = Interval;
 
+
+Interval.propTypes = {
+	id: _react.PropTypes.number.isRequired,
+	range: _react.PropTypes.arrayOf(_react.PropTypes.number).isRequired,
+	subjectId: _react.PropTypes.number.isRequired
+};
+
 },{"react":175}],179:[function(require,module,exports){
 'use strict';
 
@@ -41216,7 +41223,22 @@ var IntervalList = function (_Component) {
 	_createClass(IntervalList, [{
 		key: 'render',
 		value: function render() {
-			return _react2.default.createElement('div', { className: 'interval-list' });
+			var _props = this.props;
+			var intervals = _props.intervals;
+			var unit = _props.unit;
+
+			return _react2.default.createElement(
+				'div',
+				{ className: 'interval-list' },
+				intervals.map(function (i) {
+					return _react2.default.createElement(_Interval2.default, {
+						key: i.id,
+						id: i.id,
+						range: i.range,
+						subjectId: i.subjectId
+					});
+				})
+			);
 		}
 	}]);
 
@@ -41224,6 +41246,12 @@ var IntervalList = function (_Component) {
 }(_react.Component);
 
 exports.default = IntervalList;
+
+
+IntervalList.propTypes = {
+	intervals: _react.PropTypes.arrayOf(_react.PropTypes.object).isRequired,
+	unit: _react.PropTypes.oneOf(['day', 'hour', 'minute']).isRequired
+};
 
 },{"./Interval.js":178,"react":175}],180:[function(require,module,exports){
 'use strict';
@@ -41421,6 +41449,8 @@ var Subject = function (_Component) {
 			var _props = this.props;
 			var data = _props.data;
 			var toggleEdit = _props.toggleEdit;
+			var intervals = _props.intervals;
+			var unit = _props.unit;
 			var title = data.title;
 			var id = data.id;
 
@@ -41435,7 +41465,7 @@ var Subject = function (_Component) {
 						} },
 					'Edit'
 				),
-				_react2.default.createElement(_IntervalList2.default, null)
+				_react2.default.createElement(_IntervalList2.default, { intervals: intervals, unit: unit })
 			);
 		}
 	}]);

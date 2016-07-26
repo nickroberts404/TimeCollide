@@ -7,3 +7,9 @@ export default class Interval extends Component {
 		)
 	}
 }
+
+Interval.propTypes = {
+	id: PropTypes.number.isRequired,
+	range: PropTypes.arrayOf(PropTypes.number).isRequired,
+	subjectId: PropTypes.number.isRequired,
+}
