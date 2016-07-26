@@ -40972,6 +40972,8 @@ var _Config2 = _interopRequireDefault(_Config);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -41018,8 +41020,8 @@ var App = function (_Component) {
 		}
 	}, {
 		key: 'updateIntervals',
-		value: function updateIntervals(intervals) {
-			this.setState({ intervals: intervals });
+		value: function updateIntervals(interval) {
+			this.setState({ intervals: [].concat(_toConsumableArray(this.state.intervals), [interval]) });
 		}
 	}, {
 		key: 'render',
@@ -41256,8 +41258,6 @@ var _IntervalForm2 = _interopRequireDefault(_IntervalForm);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
-
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
@@ -41283,7 +41283,7 @@ var IntervalFormList = function (_Component) {
 			var updateIntervals = _props.updateIntervals;
 
 			var id = Date.now();
-			updateIntervals([].concat(_toConsumableArray(intervals), [{ id: id, subjectId: subjectId, range: [] }]));
+			updateIntervals({ id: id, subjectId: subjectId, range: range });
 		}
 	}, {
 		key: 'render',

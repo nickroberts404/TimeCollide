@@ -6,7 +6,7 @@ export default class IntervalFormList extends Component {
 	createInterval() {
 		const {subjectId, range, intervals, updateIntervals} = this.props;
 		const id = Date.now();
-		updateIntervals([...intervals, {id, subjectId, range:[]}]);
+		updateIntervals({id, subjectId, range:range});
 	}
 
 	render() {

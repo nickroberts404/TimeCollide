@@ -27,8 +27,8 @@ export default class App extends Component {
 		this.setState({subjects});
 	}
 
-	updateIntervals(intervals) {
-		this.setState({intervals});
+	updateIntervals(interval) {
+		this.setState({intervals: [...this.state.intervals, interval]});
 	}
 
 	render() {
