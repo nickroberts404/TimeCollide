@@ -5,18 +5,20 @@ import DatePicker from 'react-datepicker';
 export default class RangeInput extends Component {
 	render() {
 		const {range, updateRange} = this.props;
+		const start = moment(range[0]);
+		const end = moment(range[1]);
 		return (
 			<div className="range-input">
 				<DatePicker
-				    selected={moment(range[0])}
-				    startDate={moment(range[0])}
-				    endDate={moment(range[1])}
-				    onChange={t => console.log(t)} />
+				    selected={start}
+				    startDate={start}
+				    endDate={end}
+				    onChange={t => updateRange([t.valueOf(), range[1]])} />
 				<DatePicker
-				    selected={moment(range[1])}
-				    startDate={moment(range[0])}
-				    endDate={moment(range[1])}
-				    onChange={t => console.log(t)} />
+				    selected={end}
+				    startDate={start}
+				    endDate={end}
+				    onChange={t => updateRange([range[0], t.valueOf()])} />
 			</div>
 		)
 	}

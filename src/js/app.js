@@ -18,6 +18,7 @@ export default class App extends Component {
 	}
 
 	updateRange(range) {
+		range = range.sort((t1, t2) => t1 - t2);
 		this.setState({range});
 	}
 

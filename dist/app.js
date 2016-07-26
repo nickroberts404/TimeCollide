@@ -41005,6 +41005,9 @@ var App = function (_Component) {
 	}, {
 		key: 'updateRange',
 		value: function updateRange(range) {
+			range = range.sort(function (t1, t2) {
+				return t1 - t2;
+			});
 			this.setState({ range: range });
 		}
 	}, {
@@ -41241,22 +41244,24 @@ var RangeInput = function (_Component) {
 			var range = _props.range;
 			var updateRange = _props.updateRange;
 
+			var start = (0, _moment2.default)(range[0]);
+			var end = (0, _moment2.default)(range[1]);
 			return _react2.default.createElement(
 				'div',
 				{ className: 'range-input' },
 				_react2.default.createElement(_reactDatepicker2.default, {
-					selected: (0, _moment2.default)(range[0]),
-					startDate: (0, _moment2.default)(range[0]),
-					endDate: (0, _moment2.default)(range[1]),
+					selected: start,
+					startDate: start,
+					endDate: end,
 					onChange: function onChange(t) {
-						return console.log(t);
+						return updateRange([t.valueOf(), range[1]]);
 					} }),
 				_react2.default.createElement(_reactDatepicker2.default, {
-					selected: (0, _moment2.default)(range[1]),
-					startDate: (0, _moment2.default)(range[0]),
-					endDate: (0, _moment2.default)(range[1]),
+					selected: end,
+					startDate: start,
+					endDate: end,
 					onChange: function onChange(t) {
-						return console.log(t);
+						return updateRange([range[0], t.valueOf()]);
 					} })
 			);
 		}
