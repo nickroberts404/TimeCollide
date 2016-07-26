@@ -14,11 +14,11 @@ export default class App extends Component {
 	}
 	
 	updateUnit(unit) {
-		this.setState(unit);
+		this.setState({unit});
 	}
 
 	updateRange(range) {
-		this.setState(range);
+		this.setState({range});
 	}
 
 	render() {

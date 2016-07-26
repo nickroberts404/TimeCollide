@@ -36662,12 +36662,12 @@ var App = function (_Component) {
 	_createClass(App, [{
 		key: 'updateUnit',
 		value: function updateUnit(unit) {
-			this.setState(unit);
+			this.setState({ unit: unit });
 		}
 	}, {
 		key: 'updateRange',
 		value: function updateRange(range) {
-			this.setState(range);
+			this.setState({ range: range });
 		}
 	}, {
 		key: 'render',
@@ -37158,7 +37158,33 @@ var UnitInput = function (_Component) {
 	_createClass(UnitInput, [{
 		key: 'render',
 		value: function render() {
-			return _react2.default.createElement('div', { className: 'unit-input' });
+			var _props = this.props;
+			var unit = _props.unit;
+			var updateUnit = _props.updateUnit;
+
+			return _react2.default.createElement(
+				'div',
+				{ className: 'unit-input' },
+				['day', 'hour', 'minute'].map(function (u) {
+					return _react2.default.createElement(
+						'div',
+						{ className: 'radio-set', key: u },
+						_react2.default.createElement('input', {
+							type: 'radio',
+							name: 'unit',
+							id: 'unit-' + u,
+							onChange: function onChange() {
+								return updateUnit(u);
+							},
+							checked: unit === u }),
+						_react2.default.createElement(
+							'label',
+							{ htmlFor: 'unit-' + u },
+							u + 's'
+						)
+					);
+				})
+			);
 		}
 	}]);
 
