@@ -41418,9 +41418,23 @@ var Subject = function (_Component) {
 	_createClass(Subject, [{
 		key: 'render',
 		value: function render() {
+			var _props = this.props;
+			var data = _props.data;
+			var toggleEdit = _props.toggleEdit;
+			var title = data.title;
+			var id = data.id;
+
 			return _react2.default.createElement(
 				'div',
 				{ className: 'subject' },
+				title || 'Untitled',
+				_react2.default.createElement(
+					'button',
+					{ onClick: function onClick() {
+							return toggleEdit(id);
+						} },
+					'Edit'
+				),
 				_react2.default.createElement(_IntervalList2.default, null)
 			);
 		}
