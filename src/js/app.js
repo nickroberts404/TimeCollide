@@ -1,5 +1,6 @@
-import React, {Component} from 'react';
 const d3 = require('d3');
+import React, {Component} from 'react';
+import Config from './components/Config.js';
 
 export default class App extends Component {
 	constructor(props) {
@@ -13,6 +14,6 @@ export default class App extends Component {
 	}
 
 	render() {
-		return <h2>Hello Pluto</h2>
+		return <Config />
 	}
 }
