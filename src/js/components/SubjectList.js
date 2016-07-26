@@ -19,7 +19,7 @@ export default class SubjectList extends Component {
 
 	render() {
 		const {intervals, subjects, unit, range, updateSubjects, updateIntervals} = this.props;
-		const {edit} = this.props;
+		const {edit} = this.state;
 		return (
 			<div className="subject-list">
 				<button onClick={this.createSubject.bind(this)}>New Subject</button>

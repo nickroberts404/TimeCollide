@@ -41454,7 +41454,7 @@ Subject.propTypes = {
 };
 
 },{"./IntervalList.js":179,"react":175}],183:[function(require,module,exports){
-'use strict';
+"use strict";
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
@@ -41462,7 +41462,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require('react');
+var _react = require("react");
 
 var _react2 = _interopRequireDefault(_react);
 
@@ -41484,9 +41484,13 @@ var SubjectForm = function (_Component) {
 	}
 
 	_createClass(SubjectForm, [{
-		key: 'render',
+		key: "render",
 		value: function render() {
-			return _react2.default.createElement('div', { className: 'subject-form' });
+			return _react2.default.createElement(
+				"div",
+				{ className: "subject-form" },
+				"Edit Mode!"
+			);
 		}
 	}]);
 
@@ -41577,7 +41581,7 @@ var SubjectList = function (_Component) {
 			var range = _props2.range;
 			var updateSubjects = _props2.updateSubjects;
 			var updateIntervals = _props2.updateIntervals;
-			var edit = this.props.edit;
+			var edit = this.state.edit;
 
 			return _react2.default.createElement(
 				'div',
