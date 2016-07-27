@@ -41194,7 +41194,7 @@ Interval.propTypes = {
 };
 
 },{"react":175}],179:[function(require,module,exports){
-"use strict";
+'use strict';
 
 Object.defineProperty(exports, "__esModule", {
 	value: true
@@ -41202,9 +41202,13 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 
-var _react = require("react");
+var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
+
+var _RangeInput = require('./RangeInput.js');
+
+var _RangeInput2 = _interopRequireDefault(_RangeInput);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -41224,12 +41228,24 @@ var IntervalForm = function (_Component) {
 	}
 
 	_createClass(IntervalForm, [{
-		key: "render",
+		key: 'render',
 		value: function render() {
+			var _props = this.props;
+			var limitRange = _props.limitRange;
+			var range = _props.range;
+			var unit = _props.unit;
+
 			return _react2.default.createElement(
-				"div",
-				{ className: "interval-form" },
-				"interval-form"
+				'div',
+				{ className: 'interval-form' },
+				_react2.default.createElement(_RangeInput2.default, {
+					range: range,
+					unit: unit,
+					limitRange: limitRange,
+					updateRange: function updateRange(t) {
+						return console.log(t);
+					}
+				})
 			);
 		}
 	}]);
@@ -41239,7 +41255,17 @@ var IntervalForm = function (_Component) {
 
 exports.default = IntervalForm;
 
-},{"react":175}],180:[function(require,module,exports){
+
+IntervalForm.propTypes = {
+	id: _react.PropTypes.number.isRequired,
+	subjectId: _react.PropTypes.number.isRequired,
+	unit: _react.PropTypes.oneOf(['day', 'hour', 'minute']).isRequired,
+	range: _react.PropTypes.arrayOf(_react.PropTypes.number).isRequired,
+	limitRange: _react.PropTypes.arrayOf(_react.PropTypes.number).isRequired,
+	updateIntervals: _react.PropTypes.func.isRequired
+};
+
+},{"./RangeInput.js":182,"react":175}],180:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41292,6 +41318,7 @@ var IntervalFormList = function (_Component) {
 			var intervals = _props2.intervals;
 			var unit = _props2.unit;
 			var updateIntervals = _props2.updateIntervals;
+			var range = _props2.range;
 
 			return _react2.default.createElement(
 				'div',
@@ -41305,7 +41332,9 @@ var IntervalFormList = function (_Component) {
 					return _react2.default.createElement(_IntervalForm2.default, {
 						key: i.id,
 						id: i.id,
+						unit: unit,
 						range: i.range,
+						limitRange: range,
 						subjectId: i.subjectId,
 						updateIntervals: updateIntervals
 					});
@@ -41425,6 +41454,8 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
+var d3 = require('d3');
+
 var RangeInput = function (_Component) {
 	_inherits(RangeInput, _Component);
 
@@ -41440,7 +41471,7 @@ var RangeInput = function (_Component) {
 			var _props = this.props;
 			var range = _props.range;
 			var updateRange = _props.updateRange;
-			var includeDates = _props.includeDates;
+			var limitRange = _props.limitRange;
 
 			var start = (0, _moment2.default)(range[0]);
 			var end = (0, _moment2.default)(range[1]);
@@ -41451,7 +41482,8 @@ var RangeInput = function (_Component) {
 					selected: start,
 					startDate: start,
 					endDate: end,
-					includeDates: includeDates || null,
+					minDate: limitRange ? (0, _moment2.default)(limitRange[0]) : null,
+					maxDate: limitRange ? (0, _moment2.default)(limitRange[1]) : null,
 					onChange: function onChange(t) {
 						return updateRange([t.valueOf(), range[1]]);
 					} }),
@@ -41459,7 +41491,8 @@ var RangeInput = function (_Component) {
 					selected: end,
 					startDate: start,
 					endDate: end,
-					includeDates: includeDates || null,
+					minDate: limitRange ? (0, _moment2.default)(limitRange[0]) : null,
+					maxDate: limitRange ? (0, _moment2.default)(limitRange[1]) : null,
 					onChange: function onChange(t) {
 						return updateRange([range[0], t.valueOf()]);
 					} })
@@ -41477,11 +41510,11 @@ RangeInput.propTypes = {
 	unit: _react.PropTypes.oneOf(['day', 'hour', 'minute']).isRequired,
 	range: _react.PropTypes.arrayOf(_react.PropTypes.number).isRequired,
 	updateRange: _react.PropTypes.func.isRequired,
-	includeDates: _react.PropTypes.array
+	limitRange: _react.PropTypes.array
 
 };
 
-},{"moment":28,"react":175,"react-datepicker":31}],183:[function(require,module,exports){
+},{"d3":1,"moment":28,"react":175,"react-datepicker":31}],183:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {

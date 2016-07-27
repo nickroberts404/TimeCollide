@@ -10,14 +10,16 @@ export default class IntervalFormList extends Component {
 	}
 
 	render() {
-		const {intervals, unit, updateIntervals} = this.props;
+		const {intervals, unit, updateIntervals, range} = this.props;
 		return (
 			<div className="interval-list">
 				<button onClick={this.createInterval.bind(this)}>New Interval</button>
 				{intervals.map(i => <IntervalForm
 					key={i.id}
 					id={i.id}
+					unit={unit}
 					range={i.range}
+					limitRange={range}
 					subjectId={i.subjectId}
 					updateIntervals={updateIntervals}
 					/>
