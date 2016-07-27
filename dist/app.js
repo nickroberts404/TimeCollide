@@ -41019,8 +41019,8 @@ var App = function (_Component) {
 			this.setState({ subjects: subjects });
 		}
 	}, {
-		key: 'updateIntervals',
-		value: function updateIntervals(interval) {
+		key: 'createInterval',
+		value: function createInterval(interval) {
 			this.setState({ intervals: [].concat(_toConsumableArray(this.state.intervals), [interval]) });
 		}
 	}, {
@@ -41040,7 +41040,7 @@ var App = function (_Component) {
 				updateUnit: this.updateUnit.bind(this),
 				updateRange: this.updateRange.bind(this),
 				updateSubjects: this.updateSubjects.bind(this),
-				updateIntervals: this.updateIntervals.bind(this)
+				createInterval: this.createInterval.bind(this)
 			});
 		}
 	}]);
@@ -41098,7 +41098,7 @@ var Config = function (_Component) {
 			var range = _props.range;
 			var updateUnit = _props.updateUnit;
 			var updateRange = _props.updateRange;
-			var updateIntervals = _props.updateIntervals;
+			var createInterval = _props.createInterval;
 			var updateSubjects = _props.updateSubjects;
 
 			return _react2.default.createElement(
@@ -41116,7 +41116,7 @@ var Config = function (_Component) {
 					unit: unit,
 					range: range,
 					updateSubjects: updateSubjects,
-					updateIntervals: updateIntervals
+					createInterval: createInterval
 				})
 			);
 		}
@@ -41136,7 +41136,7 @@ Config.propTypes = {
 	updateUnit: _react.PropTypes.func.isRequired,
 	updateRange: _react.PropTypes.func.isRequired,
 	updateSubjects: _react.PropTypes.func.isRequired,
-	updateIntervals: _react.PropTypes.func.isRequired
+	createInterval: _react.PropTypes.func.isRequired
 };
 
 },{"./SetupForm.js":183,"./SubjectList.js":186,"react":175}],178:[function(require,module,exports){
@@ -41261,8 +41261,7 @@ IntervalForm.propTypes = {
 	subjectId: _react.PropTypes.number.isRequired,
 	unit: _react.PropTypes.oneOf(['day', 'hour', 'minute']).isRequired,
 	range: _react.PropTypes.arrayOf(_react.PropTypes.number).isRequired,
-	limitRange: _react.PropTypes.arrayOf(_react.PropTypes.number).isRequired,
-	updateIntervals: _react.PropTypes.func.isRequired
+	limitRange: _react.PropTypes.arrayOf(_react.PropTypes.number).isRequired
 };
 
 },{"./RangeInput.js":182,"react":175}],180:[function(require,module,exports){
@@ -41306,10 +41305,10 @@ var IntervalFormList = function (_Component) {
 			var subjectId = _props.subjectId;
 			var range = _props.range;
 			var intervals = _props.intervals;
-			var updateIntervals = _props.updateIntervals;
+			var createInterval = _props.createInterval;
 
 			var id = Date.now();
-			updateIntervals({ id: id, subjectId: subjectId, range: range });
+			createInterval({ id: id, subjectId: subjectId, range: range });
 		}
 	}, {
 		key: 'render',
@@ -41317,7 +41316,6 @@ var IntervalFormList = function (_Component) {
 			var _props2 = this.props;
 			var intervals = _props2.intervals;
 			var unit = _props2.unit;
-			var updateIntervals = _props2.updateIntervals;
 			var range = _props2.range;
 
 			return _react2.default.createElement(
@@ -41335,8 +41333,7 @@ var IntervalFormList = function (_Component) {
 						unit: unit,
 						range: i.range,
 						limitRange: range,
-						subjectId: i.subjectId,
-						updateIntervals: updateIntervals
+						subjectId: i.subjectId
 					});
 				})
 			);
@@ -41354,7 +41351,7 @@ IntervalFormList.propTypes = {
 	intervals: _react.PropTypes.arrayOf(_react.PropTypes.object).isRequired,
 	unit: _react.PropTypes.oneOf(['day', 'hour', 'minute']).isRequired,
 	range: _react.PropTypes.arrayOf(_react.PropTypes.number).isRequired,
-	updateIntervals: _react.PropTypes.func.isRequired
+	createInterval: _react.PropTypes.func.isRequired
 };
 
 },{"./IntervalForm.js":179,"react":175}],181:[function(require,module,exports){
@@ -41711,7 +41708,7 @@ var SubjectForm = function (_Component) {
 			var intervals = _props.intervals;
 			var unit = _props.unit;
 			var range = _props.range;
-			var updateIntervals = _props.updateIntervals;
+			var createInterval = _props.createInterval;
 			var title = this.state.title;
 
 			return _react2.default.createElement(
@@ -41725,7 +41722,7 @@ var SubjectForm = function (_Component) {
 					intervals: intervals,
 					unit: unit,
 					range: range,
-					updateIntervals: updateIntervals
+					createInterval: createInterval
 				})
 			);
 		}
@@ -41743,7 +41740,7 @@ SubjectForm.propTypes = {
 	unit: _react.PropTypes.oneOf(['day', 'hour', 'minute']).isRequired,
 	range: _react.PropTypes.arrayOf(_react.PropTypes.number).isRequired,
 	updateSubjects: _react.PropTypes.func.isRequired,
-	updateIntervals: _react.PropTypes.func.isRequired,
+	createInterval: _react.PropTypes.func.isRequired,
 	toggleEdit: _react.PropTypes.func.isRequired
 };
 
@@ -41819,7 +41816,7 @@ var SubjectList = function (_Component) {
 			var unit = _props2.unit;
 			var range = _props2.range;
 			var updateSubjects = _props2.updateSubjects;
-			var updateIntervals = _props2.updateIntervals;
+			var createInterval = _props2.createInterval;
 			var edit = this.state.edit;
 
 			return _react2.default.createElement(
@@ -41841,7 +41838,7 @@ var SubjectList = function (_Component) {
 							return i.subjectId === s.id;
 						}),
 						updateSubjects: updateSubjects,
-						updateIntervals: updateIntervals,
+						createInterval: createInterval,
 						toggleEdit: _this2.toggleEdit.bind(_this2)
 					});
 				})
@@ -41861,7 +41858,7 @@ SubjectList.propTypes = {
 	unit: _react.PropTypes.oneOf(['day', 'hour', 'minute']).isRequired,
 	range: _react.PropTypes.arrayOf(_react.PropTypes.number).isRequired,
 	updateSubjects: _react.PropTypes.func.isRequired,
-	updateIntervals: _react.PropTypes.func.isRequired
+	createInterval: _react.PropTypes.func.isRequired
 };
 
 },{"./Subject.js":184,"./SubjectForm.js":185,"react":175}],187:[function(require,module,exports){

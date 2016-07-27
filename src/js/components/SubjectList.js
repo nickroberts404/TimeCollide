@@ -20,7 +20,7 @@ export default class SubjectList extends Component {
 	}
 
 	render() {
-		const {intervals, subjects, unit, range, updateSubjects, updateIntervals} = this.props;
+		const {intervals, subjects, unit, range, updateSubjects, createInterval} = this.props;
 		const {edit} = this.state;
 		return (
 			<div className="subject-list">
@@ -33,7 +33,7 @@ export default class SubjectList extends Component {
 					: <SubjectForm key={s.id} data={s} unit={unit} range={range}
 						intervals={intervals.filter(i => i.subjectId === s.id)}
 						updateSubjects={updateSubjects}
-						updateIntervals={updateIntervals}
+						createInterval={createInterval}
 						toggleEdit={this.toggleEdit.bind(this)}
 						/>
 				)}
@@ -48,5 +48,5 @@ SubjectList.propTypes = {
 	unit: PropTypes.oneOf(['day', 'hour', 'minute']).isRequired,
 	range: PropTypes.arrayOf(PropTypes.number).isRequired,
 	updateSubjects: PropTypes.func.isRequired,
-	updateIntervals: PropTypes.func.isRequired,
+	createInterval: PropTypes.func.isRequired,
 }

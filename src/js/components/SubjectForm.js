@@ -6,7 +6,7 @@ export default class SubjectForm extends Component {
 		this.state = {title: props.data.title};
 	}
 	render() {
-		const {data, intervals, unit, range, updateIntervals} = this.props;
+		const {data, intervals, unit, range, createInterval} = this.props;
 		const {title} = this.state;
 		return (
 			<div className="subject-form">
@@ -16,7 +16,7 @@ export default class SubjectForm extends Component {
 					intervals={intervals}
 					unit={unit}
 					range={range}
-					updateIntervals={updateIntervals}
+					createInterval={createInterval}
 				/>
 			</div>
 		)
@@ -29,6 +29,6 @@ SubjectForm.propTypes = {
 	unit: PropTypes.oneOf(['day', 'hour', 'minute']).isRequired,
 	range: PropTypes.arrayOf(PropTypes.number).isRequired,
 	updateSubjects: PropTypes.func.isRequired,
-	updateIntervals: PropTypes.func.isRequired,
+	createInterval: PropTypes.func.isRequired,
 	toggleEdit: PropTypes.func.isRequired,
 }

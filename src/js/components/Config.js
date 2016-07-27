@@ -4,7 +4,7 @@ import SubjectList from './SubjectList.js';
 
 export default class Config extends Component {
 	render() {
-		const {subjects, intervals, unit, range, updateUnit, updateRange, updateIntervals, updateSubjects} = this.props;
+		const {subjects, intervals, unit, range, updateUnit, updateRange, createInterval, updateSubjects} = this.props;
 		return (
 			<div className="config">
 				<SetupForm 
@@ -19,7 +19,7 @@ export default class Config extends Component {
 					unit={unit}
 					range={range}
 					updateSubjects={updateSubjects}
-					updateIntervals={updateIntervals}
+					createInterval={createInterval}
 				/>
 			</div>
 		)
@@ -34,5 +34,5 @@ Config.propTypes = {
 	updateUnit: PropTypes.func.isRequired,
 	updateRange: PropTypes.func.isRequired,
 	updateSubjects: PropTypes.func.isRequired,
-	updateIntervals: PropTypes.func.isRequired,
+	createInterval: PropTypes.func.isRequired,
 }

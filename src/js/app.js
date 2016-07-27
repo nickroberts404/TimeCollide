@@ -27,7 +27,7 @@ export default class App extends Component {
 		this.setState({subjects});
 	}
 
-	updateIntervals(interval) {
+	createInterval(interval) {
 		this.setState({intervals: [...this.state.intervals, interval]});
 	}
 
@@ -41,7 +41,7 @@ export default class App extends Component {
 			updateUnit={this.updateUnit.bind(this)}
 			updateRange={this.updateRange.bind(this)}
 			updateSubjects={this.updateSubjects.bind(this)}
-			updateIntervals={this.updateIntervals.bind(this)}
+			createInterval={this.createInterval.bind(this)}
 			/>
 	}
 }
