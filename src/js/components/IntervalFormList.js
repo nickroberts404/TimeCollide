@@ -10,7 +10,7 @@ export default class IntervalFormList extends Component {
 	}
 
 	render() {
-		const {intervals, unit, range} = this.props;
+		const {intervals, unit, range, updateInterval, deleteInterval} = this.props;
 		return (
 			<div className="interval-list">
 				<button onClick={this.createInterval.bind(this)}>New Interval</button>
@@ -21,6 +21,8 @@ export default class IntervalFormList extends Component {
 					range={i.range}
 					limitRange={range}
 					subjectId={i.subjectId}
+					updateInterval={updateInterval}
+					deleteInterval={deleteInterval}
 					/>
 				)}
 			</div>
@@ -34,4 +36,6 @@ IntervalFormList.propTypes = {
 	unit: PropTypes.oneOf(['day', 'hour', 'minute']).isRequired,
 	range: PropTypes.arrayOf(PropTypes.number).isRequired,
 	createInterval: PropTypes.func.isRequired,
+	updateInterval: PropTypes.func.isRequired,
+	deleteInterval: PropTypes.func.isRequired,
 }

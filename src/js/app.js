@@ -31,6 +31,18 @@ export default class App extends Component {
 		this.setState({intervals: [...this.state.intervals, interval]});
 	}
 
+	updateInterval(interval) {
+		this.setState({
+			intervals: this.state.intervals.map(i => interval.id === i.id 
+				? Object.assign({}, i, interval) 
+				: i)
+		});
+	}
+
+	deleteInterval(id) {
+		this.setState({intervals: this.state.intervals.filter(i => i.id !== id)});
+	}
+
 	render() {
 		const {intervals, subjects, unit, range} = this.state;
 		return <Config
@@ -42,6 +54,8 @@ export default class App extends Component {
 			updateRange={this.updateRange.bind(this)}
 			updateSubjects={this.updateSubjects.bind(this)}
 			createInterval={this.createInterval.bind(this)}
+			updateInterval={this.updateInterval.bind(this)}
+			deleteInterval={this.deleteInterval.bind(this)}
 			/>
 	}
 }
