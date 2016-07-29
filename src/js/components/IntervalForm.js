@@ -16,6 +16,7 @@ export default class IntervalForm extends Component {
 						toUpdate: {range: t.sort((t1, t2) => t1 - t2)}
 					})}
 				/>
+				<button onClick={() => updateIntervals({type: 'delete', id: data.id})}>Delete</button>
 			</div>
 		)
 	}

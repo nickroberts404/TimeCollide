@@ -40963,7 +40963,7 @@ Object.defineProperty(exports, "__esModule", {
 function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 var createInterval = function createInterval(intervals, interval) {
-	return [].concat(_toConsumableArray(intervals), [interval]);
+	return [interval].concat(_toConsumableArray(intervals));
 };
 var updateInterval = function updateInterval(intervals, id, toUpdate) {
 	return intervals.map(function (i) {
@@ -40976,7 +40976,7 @@ var deleteInterval = function deleteInterval(intervals, id) {
 	});
 };
 var createSubject = function createSubject(subjects, subject) {
-	return [].concat(_toConsumableArray(subjects), [subject]);
+	return [subject].concat(_toConsumableArray(subjects));
 };
 var updateSubject = function updateSubject(subjects, id, toUpdate) {
 	return subjects.map(function (s) {
@@ -41330,7 +41330,14 @@ var IntervalForm = function (_Component) {
 								}) }
 						});
 					}
-				})
+				}),
+				_react2.default.createElement(
+					'button',
+					{ onClick: function onClick() {
+							return updateIntervals({ type: 'delete', id: data.id });
+						} },
+					'Delete'
+				)
 			);
 		}
 	}]);
