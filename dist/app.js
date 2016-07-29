@@ -41292,15 +41292,16 @@ var IntervalForm = function (_Component) {
 		key: 'render',
 		value: function render() {
 			var _props = this.props;
+			var data = _props.data;
 			var limitRange = _props.limitRange;
-			var range = _props.range;
 			var unit = _props.unit;
+			var updateIntervals = _props.updateIntervals;
 
 			return _react2.default.createElement(
 				'div',
 				{ className: 'interval-form' },
 				_react2.default.createElement(_RangeInput2.default, {
-					range: range,
+					range: data.range,
 					unit: unit,
 					limitRange: limitRange,
 					updateRange: function updateRange(t) {
@@ -41318,10 +41319,8 @@ exports.default = IntervalForm;
 
 
 IntervalForm.propTypes = {
-	id: _react.PropTypes.number.isRequired,
-	subjectId: _react.PropTypes.number.isRequired,
+	data: _react.PropTypes.object.isRequired,
 	unit: _react.PropTypes.oneOf(['day', 'hour', 'minute']).isRequired,
-	range: _react.PropTypes.arrayOf(_react.PropTypes.number).isRequired,
 	limitRange: _react.PropTypes.arrayOf(_react.PropTypes.number).isRequired,
 	updateIntervals: _react.PropTypes.func.isRequired
 };
@@ -41392,11 +41391,9 @@ var IntervalFormList = function (_Component) {
 				intervals.map(function (i) {
 					return _react2.default.createElement(_IntervalForm2.default, {
 						key: i.id,
-						id: i.id,
+						data: i,
 						unit: unit,
-						range: i.range,
 						limitRange: range,
-						subjectId: i.subjectId,
 						updateIntervals: updateIntervals
 					});
 				})

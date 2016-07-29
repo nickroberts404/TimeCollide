@@ -16,11 +16,9 @@ export default class IntervalFormList extends Component {
 				<button onClick={this.createInterval.bind(this)}>New Interval</button>
 				{intervals.map(i => <IntervalForm
 					key={i.id}
-					id={i.id}
+					data={i}
 					unit={unit}
-					range={i.range}
 					limitRange={range}
-					subjectId={i.subjectId}
 					updateIntervals={updateIntervals}
 					/>
 				)}

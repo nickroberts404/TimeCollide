@@ -3,11 +3,11 @@ import RangeInput from './RangeInput.js';
 
 export default class IntervalForm extends Component {
 	render() {
-		const {limitRange, range, unit} = this.props;
+		const {data, limitRange, unit, updateIntervals} = this.props;
 		return (
 			<div className="interval-form">
 				<RangeInput 
-					range={range}
+					range={data.range}
 					unit={unit}
 					limitRange={limitRange}
 					updateRange={(t) => console.log(t)}
@@ -18,10 +18,8 @@ export default class IntervalForm extends Component {
 }
 
 IntervalForm.propTypes = {
-	id: PropTypes.number.isRequired,
-	subjectId: PropTypes.number.isRequired,
+	data: PropTypes.object.isRequired,
 	unit: PropTypes.oneOf(['day', 'hour', 'minute']).isRequired,
-	range: PropTypes.arrayOf(PropTypes.number).isRequired,
 	limitRange: PropTypes.arrayOf(PropTypes.number).isRequired,
 	updateIntervals: PropTypes.func.isRequired,
 }
