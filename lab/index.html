@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Lab</title>
+	<style>
+		*, *:before, *:after { padding: 0; margin: 0; box-sizing: border-box; }
+		svg {
+			border: 1px solid #bbb;
+			margin-left: 100px;
+		}
+		#viz {
+			height: 100vh;
+			overflow: hidden;
+			/*border: 1px solid skyblue;*/
+		}
+	</style>
+</head>
+<body>
+	<div id="app">
+		<div id="viz"></div>
+	</div>
+	<script src="../node_modules/d3/build/d3.min.js"></script>
+	<script>
+		var dimensions = {
+			height: window.innerHeight,
+			width: 100
+		};
+		
+		d3.select('#viz').append('svg')
+			.attr('id', 'main-layer')
+			.attr('height', dimensions.height)
+			.attr('width', dimensions.width)
+
+		window.onresize = function(e) {
+			dimensions.height = window.innerHeight;
+			d3.select('#main-layer')
+				.attr('height', dimensions.height)
+		}
+
+		var days = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+		var dayScale = d3.scaleLinear().domain([0, days.length]).range(['skyblue', 'pink']);
+		d3.select('#main-layer').selectAll('days')
+			.data(days)
+			.enter()
+			.append('rect')
+			.attr('x', 0)
+			.attr('y', function(d, i){ return i * 40 })
+			.attr('height', 40)
+			.attr('width', dimensions.width)
+			.style('fill', function(d, i){ return dayScale(i)})
+
+
+	</script>
+</body>
+</html>
