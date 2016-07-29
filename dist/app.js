@@ -41613,10 +41613,6 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _UnitInput = require('./UnitInput.js');
-
-var _UnitInput2 = _interopRequireDefault(_UnitInput);
-
 var _RangeInput = require('./RangeInput.js');
 
 var _RangeInput2 = _interopRequireDefault(_RangeInput);
@@ -41628,7 +41624,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+// import UnitInput from './UnitInput.js';
 
+
+// Unit will remain days through most of development.
 var SetupForm = function (_Component) {
 	_inherits(SetupForm, _Component);
 
@@ -41650,10 +41649,6 @@ var SetupForm = function (_Component) {
 			return _react2.default.createElement(
 				'div',
 				{ className: 'setup-form' },
-				_react2.default.createElement(_UnitInput2.default, {
-					unit: unit,
-					updateUnit: updateUnit
-				}),
 				_react2.default.createElement(_RangeInput2.default, {
 					unit: unit,
 					range: range,
@@ -41676,7 +41671,7 @@ SetupForm.propTypes = {
 	updateRange: _react.PropTypes.func.isRequired
 };
 
-},{"./RangeInput.js":183,"./UnitInput.js":188,"react":175}],185:[function(require,module,exports){
+},{"./RangeInput.js":183,"react":175}],185:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41989,80 +41984,6 @@ SubjectList.propTypes = {
 },{"./Subject.js":185,"./SubjectForm.js":186,"react":175}],188:[function(require,module,exports){
 'use strict';
 
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var UnitInput = function (_Component) {
-	_inherits(UnitInput, _Component);
-
-	function UnitInput() {
-		_classCallCheck(this, UnitInput);
-
-		return _possibleConstructorReturn(this, Object.getPrototypeOf(UnitInput).apply(this, arguments));
-	}
-
-	_createClass(UnitInput, [{
-		key: 'render',
-		value: function render() {
-			var _props = this.props;
-			var unit = _props.unit;
-			var updateUnit = _props.updateUnit;
-
-			return _react2.default.createElement(
-				'div',
-				{ className: 'unit-input' },
-				['day', 'hour', 'minute'].map(function (u) {
-					return _react2.default.createElement(
-						'div',
-						{ className: 'radio-set', key: u },
-						_react2.default.createElement('input', {
-							type: 'radio',
-							name: 'unit',
-							id: 'unit-' + u,
-							onChange: function onChange() {
-								return updateUnit(u);
-							},
-							checked: unit === u }),
-						_react2.default.createElement(
-							'label',
-							{ htmlFor: 'unit-' + u },
-							u + 's'
-						)
-					);
-				})
-			);
-		}
-	}]);
-
-	return UnitInput;
-}(_react.Component);
-
-exports.default = UnitInput;
-
-
-UnitInput.propTypes = {
-	unit: _react.PropTypes.oneOf(['day', 'hour', 'minute']).isRequired,
-	updateUnit: _react.PropTypes.func.isRequired
-};
-
-},{"react":175}],189:[function(require,module,exports){
-'use strict';
-
 var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
@@ -42077,4 +41998,4 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 (0, _reactDom.render)(_react2.default.createElement(_app2.default, null), document.getElementById('app'));
 
-},{"./app.js":177,"react":175,"react-dom":32}]},{},[189]);
+},{"./app.js":177,"react":175,"react-dom":32}]},{},[188]);

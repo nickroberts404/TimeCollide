@@ -1,15 +1,13 @@
 import React, {Component, PropTypes} from 'react';
-import UnitInput from './UnitInput.js';
+// import UnitInput from './UnitInput.js';
 import RangeInput from './RangeInput.js';
+
+// Unit will remain days through most of development.
 export default class SetupForm extends Component {
 	render() {
 		const {unit, range, updateUnit, updateRange} = this.props;
 		return (
 			<div className="setup-form">
-				<UnitInput 
-					unit={unit} 
-					updateUnit={updateUnit}
-				/>
 				<RangeInput
 					unit={unit}
 					range={range}
