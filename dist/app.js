@@ -41213,6 +41213,10 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _moment = require('moment');
+
+var _moment2 = _interopRequireDefault(_moment);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -41233,10 +41237,25 @@ var Interval = function (_Component) {
 	_createClass(Interval, [{
 		key: 'render',
 		value: function render() {
+			var data = this.props.data;
+
+			var range = data.range.map(function (r) {
+				return (0, _moment2.default)(r).format('MMMM Do');
+			});
 			return _react2.default.createElement(
 				'div',
 				{ className: 'interval' },
-				'interval'
+				_react2.default.createElement(
+					'span',
+					{ className: 'begin' },
+					range[0]
+				),
+				' to ',
+				_react2.default.createElement(
+					'span',
+					{ className: 'end' },
+					range[1]
+				)
 			);
 		}
 	}]);
@@ -41248,13 +41267,11 @@ exports.default = Interval;
 
 
 Interval.propTypes = {
-	id: _react.PropTypes.number.isRequired,
-	range: _react.PropTypes.arrayOf(_react.PropTypes.number).isRequired,
-	unit: _react.PropTypes.oneOf(['day', 'hour', 'minute']).isRequired,
-	subjectId: _react.PropTypes.number.isRequired
+	data: _react.PropTypes.object.isRequired,
+	unit: _react.PropTypes.oneOf(['day', 'hour', 'minute']).isRequired
 };
 
-},{"react":175}],180:[function(require,module,exports){
+},{"moment":28,"react":175}],180:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41468,10 +41485,8 @@ var IntervalList = function (_Component) {
 				intervals.map(function (i) {
 					return _react2.default.createElement(_Interval2.default, {
 						key: i.id,
-						id: i.id,
-						unit: unit,
-						range: i.range,
-						subjectId: i.subjectId
+						data: i,
+						unit: unit
 					});
 				})
 			);
@@ -41771,6 +41786,7 @@ var SubjectForm = function (_Component) {
 			var _props = this.props;
 			var data = _props.data;
 			var updateSubjects = _props.updateSubjects;
+			var toggleEdit = _props.toggleEdit;
 			var title = this.state.title;
 
 			updateSubjects({
@@ -41778,6 +41794,7 @@ var SubjectForm = function (_Component) {
 				id: data.id,
 				toUpdate: { title: title }
 			});
+			toggleEdit();
 		}
 	}, {
 		key: 'render',

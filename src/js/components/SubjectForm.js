@@ -6,13 +6,14 @@ export default class SubjectForm extends Component {
 		this.state = {title: props.data.title};
 	}
 	updateSubject() {
-		const {data, updateSubjects} = this.props;
+		const {data, updateSubjects, toggleEdit} = this.props;
 		const {title} = this.state;
 		updateSubjects({
 			type: 'update',
 			id: data.id,
 			toUpdate: {title}
 		})
+		toggleEdit();
 	}
 	render() {
 		const {data, intervals, unit, range, updateIntervals} = this.props;

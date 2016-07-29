@@ -8,10 +8,8 @@ export default class IntervalList extends Component {
 			<div className="interval-list">
 				{intervals.map(i => <Interval
 					key={i.id}
-					id={i.id}
+					data={i}
 					unit={unit}
-					range={i.range}
-					subjectId={i.subjectId}
 					/>
 				)}
 			</div>
