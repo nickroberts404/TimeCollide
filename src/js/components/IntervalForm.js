@@ -10,7 +10,12 @@ export default class IntervalForm extends Component {
 					range={data.range}
 					unit={unit}
 					limitRange={limitRange}
-					updateRange={(t) => console.log(t)}
+					updateRange={(t) => updateIntervals({
+						type: 'update',
+						interval: Object.assign({}, data, {
+							range: t.sort((t1, t2) => t1 - t2)
+						})
+					})}
 				/>
 			</div>
 		)

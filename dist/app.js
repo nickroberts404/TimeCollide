@@ -41305,7 +41305,14 @@ var IntervalForm = function (_Component) {
 					unit: unit,
 					limitRange: limitRange,
 					updateRange: function updateRange(t) {
-						return console.log(t);
+						return updateIntervals({
+							type: 'update',
+							interval: Object.assign({}, data, {
+								range: t.sort(function (t1, t2) {
+									return t1 - t2;
+								})
+							})
+						});
 					}
 				})
 			);
