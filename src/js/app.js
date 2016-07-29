@@ -29,7 +29,7 @@ export default class App extends Component {
 		if (action.type === 'create') {
 			this.setState({intervals: Actions.createInterval(intervals, action.interval)});
 		} else if (action.type === 'update') {
-			this.setState({intervals: Actions.updateInterval(intervals, action.interval)});
+			this.setState({intervals: Actions.updateInterval(intervals, action.id, action.toUpdate)});
 		} else if (action.type === 'delete') {
 			this.setState({intervals: Actions.deleteInterval(intervals, action.id)});
 		}
@@ -40,7 +40,7 @@ export default class App extends Component {
 		if (action.type === 'create') {
 			this.setState({subjects: Actions.createSubject(subjects, action.subject)});
 		} else if (action.type === 'update') {
-			this.setState({subjects: Actions.updateSubject(subjects, action.subject)});
+			this.setState({subjects: Actions.updateSubject(subjects, action.id, action.toUpdate)});
 		} else if (action.type === 'delete') {
 			this.setState({subjects: Actions.deleteSubject(subjects, action.id)});
 		}

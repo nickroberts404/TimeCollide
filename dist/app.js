@@ -40965,9 +40965,9 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 var createInterval = function createInterval(intervals, interval) {
 	return [].concat(_toConsumableArray(intervals), [interval]);
 };
-var updateInterval = function updateInterval(intervals, interval) {
+var updateInterval = function updateInterval(intervals, id, toUpdate) {
 	return intervals.map(function (i) {
-		return i.id === interval.id ? Object.assign({}, i, interval) : i;
+		return i.id === id ? Object.assign({}, i, toUpdate) : i;
 	});
 };
 var deleteInterval = function deleteInterval(intervals, id) {
@@ -40978,9 +40978,9 @@ var deleteInterval = function deleteInterval(intervals, id) {
 var createSubject = function createSubject(subjects, subject) {
 	return [].concat(_toConsumableArray(subjects), [subject]);
 };
-var updateSubject = function updateSubject(subjects, subject) {
+var updateSubject = function updateSubject(subjects, id, toUpdate) {
 	return subjects.map(function (s) {
-		return s.id === subject.id ? Object.assign({}, s, subject) : s;
+		return s.id === id ? Object.assign({}, s, toUpdate) : s;
 	});
 };
 var deleteSubject = function deleteSubject(subjects, id) {
@@ -41067,7 +41067,7 @@ var App = function (_Component) {
 			if (action.type === 'create') {
 				this.setState({ intervals: _actions2.default.createInterval(intervals, action.interval) });
 			} else if (action.type === 'update') {
-				this.setState({ intervals: _actions2.default.updateInterval(intervals, action.interval) });
+				this.setState({ intervals: _actions2.default.updateInterval(intervals, action.id, action.toUpdate) });
 			} else if (action.type === 'delete') {
 				this.setState({ intervals: _actions2.default.deleteInterval(intervals, action.id) });
 			}
@@ -41079,7 +41079,7 @@ var App = function (_Component) {
 			if (action.type === 'create') {
 				this.setState({ subjects: _actions2.default.createSubject(subjects, action.subject) });
 			} else if (action.type === 'update') {
-				this.setState({ subjects: _actions2.default.updateSubject(subjects, action.subject) });
+				this.setState({ subjects: _actions2.default.updateSubject(subjects, action.id, action.toUpdate) });
 			} else if (action.type === 'delete') {
 				this.setState({ subjects: _actions2.default.deleteSubject(subjects, action.id) });
 			}
@@ -41307,11 +41307,10 @@ var IntervalForm = function (_Component) {
 					updateRange: function updateRange(t) {
 						return updateIntervals({
 							type: 'update',
-							interval: Object.assign({}, data, {
-								range: t.sort(function (t1, t2) {
+							id: data.id,
+							toUpdate: { range: t.sort(function (t1, t2) {
 									return t1 - t2;
-								})
-							})
+								}) }
 						});
 					}
 				})
@@ -41767,16 +41766,30 @@ var SubjectForm = function (_Component) {
 	}
 
 	_createClass(SubjectForm, [{
+		key: 'updateSubject',
+		value: function updateSubject() {
+			var _props = this.props;
+			var data = _props.data;
+			var updateSubjects = _props.updateSubjects;
+			var title = this.state.title;
+
+			updateSubjects({
+				type: 'update',
+				id: data.id,
+				toUpdate: { title: title }
+			});
+		}
+	}, {
 		key: 'render',
 		value: function render() {
 			var _this2 = this;
 
-			var _props = this.props;
-			var data = _props.data;
-			var intervals = _props.intervals;
-			var unit = _props.unit;
-			var range = _props.range;
-			var updateIntervals = _props.updateIntervals;
+			var _props2 = this.props;
+			var data = _props2.data;
+			var intervals = _props2.intervals;
+			var unit = _props2.unit;
+			var range = _props2.range;
+			var updateIntervals = _props2.updateIntervals;
 			var title = this.state.title;
 
 			return _react2.default.createElement(
@@ -41785,6 +41798,11 @@ var SubjectForm = function (_Component) {
 				_react2.default.createElement('input', { value: title, onChange: function onChange(e) {
 						return _this2.setState({ title: e.target.value });
 					} }),
+				_react2.default.createElement(
+					'button',
+					{ onClick: this.updateSubject.bind(this) },
+					'Done'
+				),
 				_react2.default.createElement(_IntervalFormList2.default, {
 					subjectId: data.id,
 					intervals: intervals,

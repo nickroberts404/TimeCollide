@@ -12,9 +12,8 @@ export default class IntervalForm extends Component {
 					limitRange={limitRange}
 					updateRange={(t) => updateIntervals({
 						type: 'update',
-						interval: Object.assign({}, data, {
-							range: t.sort((t1, t2) => t1 - t2)
-						})
+						id: data.id,
+						toUpdate: {range: t.sort((t1, t2) => t1 - t2)}
 					})}
 				/>
 			</div>
