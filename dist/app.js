@@ -41788,12 +41788,24 @@ var SubjectForm = function (_Component) {
 	}
 
 	_createClass(SubjectForm, [{
+		key: 'deleteSubject',
+		value: function deleteSubject() {
+			var _props = this.props;
+			var updateSubjects = _props.updateSubjects;
+			var data = _props.data;
+
+			updateSubjects({
+				type: 'delete',
+				id: data.id
+			});
+		}
+	}, {
 		key: 'updateSubject',
 		value: function updateSubject() {
-			var _props = this.props;
-			var data = _props.data;
-			var updateSubjects = _props.updateSubjects;
-			var toggleEdit = _props.toggleEdit;
+			var _props2 = this.props;
+			var data = _props2.data;
+			var updateSubjects = _props2.updateSubjects;
+			var toggleEdit = _props2.toggleEdit;
 			var title = this.state.title;
 
 			updateSubjects({
@@ -41808,20 +41820,29 @@ var SubjectForm = function (_Component) {
 		value: function render() {
 			var _this2 = this;
 
-			var _props2 = this.props;
-			var data = _props2.data;
-			var intervals = _props2.intervals;
-			var unit = _props2.unit;
-			var range = _props2.range;
-			var updateIntervals = _props2.updateIntervals;
+			var _props3 = this.props;
+			var data = _props3.data;
+			var intervals = _props3.intervals;
+			var unit = _props3.unit;
+			var range = _props3.range;
+			var updateIntervals = _props3.updateIntervals;
 			var title = this.state.title;
 
 			return _react2.default.createElement(
 				'div',
 				{ className: 'subject-form' },
-				_react2.default.createElement('input', { value: title, onChange: function onChange(e) {
+				_react2.default.createElement('input', {
+					value: title,
+					placeholder: 'Name...',
+					autoFocus: true,
+					onChange: function onChange(e) {
 						return _this2.setState({ title: e.target.value });
 					} }),
+				_react2.default.createElement(
+					'button',
+					{ onClick: this.deleteSubject.bind(this) },
+					'Delete'
+				),
 				_react2.default.createElement(
 					'button',
 					{ onClick: this.updateSubject.bind(this) },

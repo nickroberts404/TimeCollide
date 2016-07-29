@@ -5,6 +5,13 @@ export default class SubjectForm extends Component {
 		super(props);
 		this.state = {title: props.data.title};
 	}
+	deleteSubject() {
+		const {updateSubjects, data} = this.props;
+		updateSubjects({
+			type: 'delete',
+			id: data.id
+		})
+	}
 	updateSubject() {
 		const {data, updateSubjects, toggleEdit} = this.props;
 		const {title} = this.state;
@@ -20,7 +27,12 @@ export default class SubjectForm extends Component {
 		const {title} = this.state;
 		return (
 			<div className="subject-form">
-				<input value={title} onChange={e => this.setState({title: e.target.value})} />
+				<input 
+					value={title}
+					placeholder="Name..."
+					autoFocus={true}
+					onChange={e => this.setState({title: e.target.value})} />
+				<button onClick={this.deleteSubject.bind(this)}>Delete</button>
 				<button onClick={this.updateSubject.bind(this)}>Done</button>
 				<IntervalFormList
 					subjectId={data.id}
