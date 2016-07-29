@@ -1,6 +1,7 @@
 const d3 = require('d3');
 import React, {Component} from 'react';
 import Config from './components/Config.js';
+import Actions from './actions.js';
 
 export default class App extends Component {
 	constructor(props) {
@@ -23,24 +24,26 @@ export default class App extends Component {
 		this.setState({range});
 	}
 
-	updateSubjects(subjects) {
-		this.setState({subjects});
+	updateIntervals(action) {
+		const intervals = this.state.intervals;
+		if (action.type === 'create') {
+			this.setState({intervals: Actions.createInterval(intervals, action.interval)});
+		} else if (action.type === 'update') {
+			this.setState({intervals: Actions.updateInterval(intervals, action.interval)});
+		} else if (action.type === 'delete') {
+			this.setState({intervals: Actions.deleteInterval(intervals, action.id)});
+		}
 	}
 
-	createInterval(interval) {
-		this.setState({intervals: [...this.state.intervals, interval]});
-	}
-
-	updateInterval(interval) {
-		this.setState({
-			intervals: this.state.intervals.map(i => interval.id === i.id 
-				? Object.assign({}, i, interval) 
-				: i)
-		});
-	}
-
-	deleteInterval(id) {
-		this.setState({intervals: this.state.intervals.filter(i => i.id !== id)});
+	updateSubjects(action) {
+		const subjects = this.state.subjects;
+		if (action.type === 'create') {
+			this.setState({subjects: Actions.createSubject(subjects, action.subject)});
+		} else if (action.type === 'update') {
+			this.setState({subjects: Actions.updateSubject(subjects, action.subject)});
+		} else if (action.type === 'delete') {
+			this.setState({subjects: Actions.deleteSubject(subjects, action.id)});
+		}
 	}
 
 	render() {
@@ -53,9 +56,7 @@ export default class App extends Component {
 			updateUnit={this.updateUnit.bind(this)}
 			updateRange={this.updateRange.bind(this)}
 			updateSubjects={this.updateSubjects.bind(this)}
-			createInterval={this.createInterval.bind(this)}
-			updateInterval={this.updateInterval.bind(this)}
-			deleteInterval={this.deleteInterval.bind(this)}
+			updateIntervals={this.updateIntervals.bind(this)}
 			/>
 	}
 }

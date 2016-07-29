@@ -23,6 +23,5 @@ IntervalForm.propTypes = {
 	unit: PropTypes.oneOf(['day', 'hour', 'minute']).isRequired,
 	range: PropTypes.arrayOf(PropTypes.number).isRequired,
 	limitRange: PropTypes.arrayOf(PropTypes.number).isRequired,
-	updateInterval: PropTypes.func.isRequired,
-	deleteInterval: PropTypes.func.isRequired,
+	updateIntervals: PropTypes.func.isRequired,
 }

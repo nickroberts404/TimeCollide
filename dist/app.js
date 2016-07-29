@@ -40954,6 +40954,51 @@ module.exports = validateDOMNesting;
 module.exports = require('./lib/React');
 
 },{"./lib/React":59}],176:[function(require,module,exports){
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+
+var createInterval = function createInterval(intervals, interval) {
+	return [].concat(_toConsumableArray(intervals), [interval]);
+};
+var updateInterval = function updateInterval(intervals, interval) {
+	return intervals.map(function (i) {
+		return i.id === interval.id ? Object.assign({}, i, interval) : i;
+	});
+};
+var deleteInterval = function deleteInterval(intervals, id) {
+	return intervals.filter(function (i) {
+		return i.id !== id;
+	});
+};
+var createSubject = function createSubject(subjects, subject) {
+	return [].concat(_toConsumableArray(subjects), [subject]);
+};
+var updateSubject = function updateSubject(subjects, subject) {
+	return subjects.map(function (s) {
+		return s.id === subject.id ? Object.assign({}, s, subject) : s;
+	});
+};
+var deleteSubject = function deleteSubject(subjects, id) {
+	return subjects.filter(function (s) {
+		return s.id !== id;
+	});
+};
+
+exports.default = {
+	createInterval: createInterval,
+	updateInterval: updateInterval,
+	deleteInterval: deleteInterval,
+	createSubject: createSubject,
+	updateSubject: updateSubject,
+	deleteSubject: deleteSubject
+};
+
+},{}],177:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -40970,9 +41015,11 @@ var _Config = require('./components/Config.js');
 
 var _Config2 = _interopRequireDefault(_Config);
 
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+var _actions = require('./actions.js');
 
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
+var _actions2 = _interopRequireDefault(_actions);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -41014,30 +41061,28 @@ var App = function (_Component) {
 			this.setState({ range: range });
 		}
 	}, {
+		key: 'updateIntervals',
+		value: function updateIntervals(action) {
+			var intervals = this.state.intervals;
+			if (action.type === 'create') {
+				this.setState({ intervals: _actions2.default.createInterval(intervals, action.interval) });
+			} else if (action.type === 'update') {
+				this.setState({ intervals: _actions2.default.updateInterval(intervals, action.interval) });
+			} else if (action.type === 'delete') {
+				this.setState({ intervals: _actions2.default.deleteInterval(intervals, action.id) });
+			}
+		}
+	}, {
 		key: 'updateSubjects',
-		value: function updateSubjects(subjects) {
-			this.setState({ subjects: subjects });
-		}
-	}, {
-		key: 'createInterval',
-		value: function createInterval(interval) {
-			this.setState({ intervals: [].concat(_toConsumableArray(this.state.intervals), [interval]) });
-		}
-	}, {
-		key: 'updateInterval',
-		value: function updateInterval(interval) {
-			this.setState({
-				intervals: this.state.intervals.map(function (i) {
-					return interval.id === i.id ? Object.assign({}, i, interval) : i;
-				})
-			});
-		}
-	}, {
-		key: 'deleteInterval',
-		value: function deleteInterval(id) {
-			this.setState({ intervals: this.state.intervals.filter(function (i) {
-					return i.id !== id;
-				}) });
+		value: function updateSubjects(action) {
+			var subjects = this.state.subjects;
+			if (action.type === 'create') {
+				this.setState({ subjects: _actions2.default.createSubject(subjects, action.subject) });
+			} else if (action.type === 'update') {
+				this.setState({ subjects: _actions2.default.updateSubject(subjects, action.subject) });
+			} else if (action.type === 'delete') {
+				this.setState({ subjects: _actions2.default.deleteSubject(subjects, action.id) });
+			}
 		}
 	}, {
 		key: 'render',
@@ -41056,9 +41101,7 @@ var App = function (_Component) {
 				updateUnit: this.updateUnit.bind(this),
 				updateRange: this.updateRange.bind(this),
 				updateSubjects: this.updateSubjects.bind(this),
-				createInterval: this.createInterval.bind(this),
-				updateInterval: this.updateInterval.bind(this),
-				deleteInterval: this.deleteInterval.bind(this)
+				updateIntervals: this.updateIntervals.bind(this)
 			});
 		}
 	}]);
@@ -41068,7 +41111,7 @@ var App = function (_Component) {
 
 exports.default = App;
 
-},{"./components/Config.js":177,"d3":1,"react":175}],177:[function(require,module,exports){
+},{"./actions.js":176,"./components/Config.js":178,"d3":1,"react":175}],178:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41116,9 +41159,7 @@ var Config = function (_Component) {
 			var range = _props.range;
 			var updateUnit = _props.updateUnit;
 			var updateRange = _props.updateRange;
-			var createInterval = _props.createInterval;
-			var updateInterval = _props.updateInterval;
-			var deleteInterval = _props.deleteInterval;
+			var updateIntervals = _props.updateIntervals;
 			var updateSubjects = _props.updateSubjects;
 
 			return _react2.default.createElement(
@@ -41136,9 +41177,7 @@ var Config = function (_Component) {
 					unit: unit,
 					range: range,
 					updateSubjects: updateSubjects,
-					createInterval: createInterval,
-					updateInterval: updateInterval,
-					deleteInterval: deleteInterval
+					updateIntervals: updateIntervals
 				})
 			);
 		}
@@ -41158,12 +41197,10 @@ Config.propTypes = {
 	updateUnit: _react.PropTypes.func.isRequired,
 	updateRange: _react.PropTypes.func.isRequired,
 	updateSubjects: _react.PropTypes.func.isRequired,
-	createInterval: _react.PropTypes.func.isRequired,
-	updateInterval: _react.PropTypes.func.isRequired,
-	deleteInterval: _react.PropTypes.func.isRequired
+	updateIntervals: _react.PropTypes.func.isRequired
 };
 
-},{"./SetupForm.js":183,"./SubjectList.js":186,"react":175}],178:[function(require,module,exports){
+},{"./SetupForm.js":184,"./SubjectList.js":187,"react":175}],179:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41217,7 +41254,7 @@ Interval.propTypes = {
 	subjectId: _react.PropTypes.number.isRequired
 };
 
-},{"react":175}],179:[function(require,module,exports){
+},{"react":175}],180:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41286,11 +41323,10 @@ IntervalForm.propTypes = {
 	unit: _react.PropTypes.oneOf(['day', 'hour', 'minute']).isRequired,
 	range: _react.PropTypes.arrayOf(_react.PropTypes.number).isRequired,
 	limitRange: _react.PropTypes.arrayOf(_react.PropTypes.number).isRequired,
-	updateInterval: _react.PropTypes.func.isRequired,
-	deleteInterval: _react.PropTypes.func.isRequired
+	updateIntervals: _react.PropTypes.func.isRequired
 };
 
-},{"./RangeInput.js":182,"react":175}],180:[function(require,module,exports){
+},{"./RangeInput.js":183,"react":175}],181:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41331,10 +41367,10 @@ var IntervalFormList = function (_Component) {
 			var subjectId = _props.subjectId;
 			var range = _props.range;
 			var intervals = _props.intervals;
-			var createInterval = _props.createInterval;
+			var updateIntervals = _props.updateIntervals;
 
 			var id = Date.now();
-			createInterval({ id: id, subjectId: subjectId, range: range });
+			updateIntervals({ type: 'create', interval: { id: id, subjectId: subjectId, range: range } });
 		}
 	}, {
 		key: 'render',
@@ -41343,8 +41379,7 @@ var IntervalFormList = function (_Component) {
 			var intervals = _props2.intervals;
 			var unit = _props2.unit;
 			var range = _props2.range;
-			var updateInterval = _props2.updateInterval;
-			var deleteInterval = _props2.deleteInterval;
+			var updateIntervals = _props2.updateIntervals;
 
 			return _react2.default.createElement(
 				'div',
@@ -41362,8 +41397,7 @@ var IntervalFormList = function (_Component) {
 						range: i.range,
 						limitRange: range,
 						subjectId: i.subjectId,
-						updateInterval: updateInterval,
-						deleteInterval: deleteInterval
+						updateIntervals: updateIntervals
 					});
 				})
 			);
@@ -41381,12 +41415,10 @@ IntervalFormList.propTypes = {
 	intervals: _react.PropTypes.arrayOf(_react.PropTypes.object).isRequired,
 	unit: _react.PropTypes.oneOf(['day', 'hour', 'minute']).isRequired,
 	range: _react.PropTypes.arrayOf(_react.PropTypes.number).isRequired,
-	createInterval: _react.PropTypes.func.isRequired,
-	updateInterval: _react.PropTypes.func.isRequired,
-	deleteInterval: _react.PropTypes.func.isRequired
+	updateIntervals: _react.PropTypes.func.isRequired
 };
 
-},{"./IntervalForm.js":179,"react":175}],181:[function(require,module,exports){
+},{"./IntervalForm.js":180,"react":175}],182:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41454,7 +41486,7 @@ IntervalList.propTypes = {
 	unit: _react.PropTypes.oneOf(['day', 'hour', 'minute']).isRequired
 };
 
-},{"./Interval.js":178,"react":175}],182:[function(require,module,exports){
+},{"./Interval.js":179,"react":175}],183:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41543,7 +41575,7 @@ RangeInput.propTypes = {
 
 };
 
-},{"d3":1,"moment":28,"react":175,"react-datepicker":31}],183:[function(require,module,exports){
+},{"d3":1,"moment":28,"react":175,"react-datepicker":31}],184:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41619,7 +41651,7 @@ SetupForm.propTypes = {
 	updateRange: _react.PropTypes.func.isRequired
 };
 
-},{"./RangeInput.js":182,"./UnitInput.js":187,"react":175}],184:[function(require,module,exports){
+},{"./RangeInput.js":183,"./UnitInput.js":188,"react":175}],185:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41693,7 +41725,7 @@ Subject.propTypes = {
 	toggleEdit: _react.PropTypes.func.isRequired
 };
 
-},{"./IntervalList.js":181,"react":175}],185:[function(require,module,exports){
+},{"./IntervalList.js":182,"react":175}],186:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41740,9 +41772,7 @@ var SubjectForm = function (_Component) {
 			var intervals = _props.intervals;
 			var unit = _props.unit;
 			var range = _props.range;
-			var createInterval = _props.createInterval;
-			var updateInterval = _props.updateInterval;
-			var deleteInterval = _props.deleteInterval;
+			var updateIntervals = _props.updateIntervals;
 			var title = this.state.title;
 
 			return _react2.default.createElement(
@@ -41756,9 +41786,7 @@ var SubjectForm = function (_Component) {
 					intervals: intervals,
 					unit: unit,
 					range: range,
-					createInterval: createInterval,
-					updateInterval: updateInterval,
-					deleteInterval: deleteInterval
+					updateIntervals: updateIntervals
 				})
 			);
 		}
@@ -41776,11 +41804,11 @@ SubjectForm.propTypes = {
 	unit: _react.PropTypes.oneOf(['day', 'hour', 'minute']).isRequired,
 	range: _react.PropTypes.arrayOf(_react.PropTypes.number).isRequired,
 	updateSubjects: _react.PropTypes.func.isRequired,
-	createInterval: _react.PropTypes.func.isRequired,
+	updateIntervals: _react.PropTypes.func.isRequired,
 	toggleEdit: _react.PropTypes.func.isRequired
 };
 
-},{"./IntervalFormList.js":180,"react":175}],186:[function(require,module,exports){
+},{"./IntervalFormList.js":181,"react":175}],187:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41802,8 +41830,6 @@ var _Subject = require('./Subject.js');
 var _Subject2 = _interopRequireDefault(_Subject);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } else { return Array.from(arr); } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -41833,12 +41859,8 @@ var SubjectList = function (_Component) {
 	}, {
 		key: 'createSubject',
 		value: function createSubject() {
-			var _props = this.props;
-			var subjects = _props.subjects;
-			var updateSubjects = _props.updateSubjects;
-
 			var id = Date.now();
-			updateSubjects([].concat(_toConsumableArray(subjects), [{ title: '', id: id }]));
+			this.props.updateSubjects({ type: 'create', subject: { title: '', id: id } });
 			this.toggleEdit(id);
 		}
 	}, {
@@ -41846,15 +41868,13 @@ var SubjectList = function (_Component) {
 		value: function render() {
 			var _this2 = this;
 
-			var _props2 = this.props;
-			var intervals = _props2.intervals;
-			var subjects = _props2.subjects;
-			var unit = _props2.unit;
-			var range = _props2.range;
-			var updateSubjects = _props2.updateSubjects;
-			var createInterval = _props2.createInterval;
-			var updateInterval = _props2.updateInterval;
-			var deleteInterval = _props2.deleteInterval;
+			var _props = this.props;
+			var intervals = _props.intervals;
+			var subjects = _props.subjects;
+			var unit = _props.unit;
+			var range = _props.range;
+			var updateSubjects = _props.updateSubjects;
+			var updateIntervals = _props.updateIntervals;
 			var edit = this.state.edit;
 
 			return _react2.default.createElement(
@@ -41876,9 +41896,7 @@ var SubjectList = function (_Component) {
 							return i.subjectId === s.id;
 						}),
 						updateSubjects: updateSubjects,
-						createInterval: createInterval,
-						updateInterval: updateInterval,
-						deleteInterval: deleteInterval,
+						updateIntervals: updateIntervals,
 						toggleEdit: _this2.toggleEdit.bind(_this2)
 					});
 				})
@@ -41898,12 +41916,10 @@ SubjectList.propTypes = {
 	unit: _react.PropTypes.oneOf(['day', 'hour', 'minute']).isRequired,
 	range: _react.PropTypes.arrayOf(_react.PropTypes.number).isRequired,
 	updateSubjects: _react.PropTypes.func.isRequired,
-	createInterval: _react.PropTypes.func.isRequired,
-	updateInterval: _react.PropTypes.func.isRequired,
-	deleteInterval: _react.PropTypes.func.isRequired
+	updateIntervals: _react.PropTypes.func.isRequired
 };
 
-},{"./Subject.js":184,"./SubjectForm.js":185,"react":175}],187:[function(require,module,exports){
+},{"./Subject.js":185,"./SubjectForm.js":186,"react":175}],188:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41977,7 +41993,7 @@ UnitInput.propTypes = {
 	updateUnit: _react.PropTypes.func.isRequired
 };
 
-},{"react":175}],188:[function(require,module,exports){
+},{"react":175}],189:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');
@@ -41994,4 +42010,4 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 (0, _reactDom.render)(_react2.default.createElement(_app2.default, null), document.getElementById('app'));
 
-},{"./app.js":176,"react":175,"react-dom":32}]},{},[188]);
+},{"./app.js":177,"react":175,"react-dom":32}]},{},[189]);
