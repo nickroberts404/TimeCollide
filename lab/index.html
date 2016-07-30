@@ -6,8 +6,8 @@
 	<style>
 		*, *:before, *:after { padding: 0; margin: 0; box-sizing: border-box; }
 		svg {
-			border: 1px solid #bbb;
-			margin-left: 100px;
+			/*border: 1px solid #bbb;*/
+			margin-left: 200px;
 		}
 		#viz {
 			height: 100vh;
@@ -24,23 +24,23 @@
 	<script>
 		var dimensions = {
 			height: window.innerHeight,
-			width: 100
+			width: 150
 		};
 		
-		d3.select('#viz').append('svg')
+		var svg = d3.select('#viz').append('svg')
 			.attr('id', 'main-layer')
 			.attr('height', dimensions.height)
 			.attr('width', dimensions.width)
-
+		var view = svg.append('g');
+	
 		window.onresize = function(e) {
 			dimensions.height = window.innerHeight;
 			d3.select('#main-layer')
 				.attr('height', dimensions.height)
 		}
-
-		var days = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-		var dayScale = d3.scaleLinear().domain([0, days.length]).range(['skyblue', 'pink']);
-		d3.select('#main-layer').selectAll('days')
+		var days = d3.range(30);
+		var dayScale = d3.scaleLinear().domain([0, days.length]).range(['#F1F2B5', '#135058']);
+		view.selectAll('days')
 			.data(days)
 			.enter()
 			.append('rect')
@@ -48,8 +48,24 @@
 			.attr('y', function(d, i){ return i * 40 })
 			.attr('height', 40)
 			.attr('width', dimensions.width)
+			.style('stroke', 'white')
 			.style('fill', function(d, i){ return dayScale(i)})
-
+		var zoom = d3.zoom()
+			.on('zoom', panned)
+		svg.append('rect')
+			.attr('class', 'zoom')
+			.attr('height', dimensions.height)
+			.attr('width', dimensions.width)
+			.style('fill', 'none')
+			.style('pointer-events', 'all')
+			.call(zoom)
+		var yd = 0
+		function panned() {
+			if(d3.event.sourceEvent.type === "wheel"){
+				yd = Math.max( Math.min(0, yd + d3.event.sourceEvent.wheelDeltaY), (-1 * (days.length * 40)) + dimensions.height )
+				view.attr('transform', 'translate(0, '+yd+')');
+			}
+		}
 
 	</script>
 </body>
