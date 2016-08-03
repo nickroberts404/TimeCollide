@@ -1,6 +1,7 @@
 const d3 = require('d3');
 import React, {Component} from 'react';
 import Config from './components/Config';
+import Display from './components/Display';
 import Actions from './actions.js';
 
 export default class App extends Component {
@@ -48,15 +49,21 @@ export default class App extends Component {
 
 	render() {
 		const {intervals, subjects, unit, range} = this.state;
-		return <Config
-			intervals={intervals}
-			subjects={subjects}
-			unit={unit}
-			range={range}
-			updateUnit={this.updateUnit.bind(this)}
-			updateRange={this.updateRange.bind(this)}
-			updateSubjects={this.updateSubjects.bind(this)}
-			updateIntervals={this.updateIntervals.bind(this)}
-			/>
+		return (
+			<div className="app-container">
+				<Display />
+				<Config
+					intervals={intervals}
+					subjects={subjects}
+					unit={unit}
+					range={range}
+					updateUnit={this.updateUnit.bind(this)}
+					updateRange={this.updateRange.bind(this)}
+					updateSubjects={this.updateSubjects.bind(this)}
+					updateIntervals={this.updateIntervals.bind(this)}
+					/>
+			</div>
+		)
+
 	}
 }
