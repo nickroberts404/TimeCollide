@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import IntervalFormList from './IntervalFormList.js';
+import IntervalFormList from '../Interval/IntervalFormList.js';
 export default class SubjectForm extends Component {
 	constructor(props) {
 		super(props);

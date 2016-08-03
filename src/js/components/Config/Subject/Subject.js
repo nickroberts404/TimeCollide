@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import IntervalList from './IntervalList.js';
+import IntervalList from '../Interval/IntervalList.js';
 
 export default class Subject extends Component {
 	render() {

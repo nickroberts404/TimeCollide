@@ -41011,7 +41011,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _Config = require('./components/Config.js');
+var _Config = require('./components/Config');
 
 var _Config2 = _interopRequireDefault(_Config);
 
@@ -41111,7 +41111,7 @@ var App = function (_Component) {
 
 exports.default = App;
 
-},{"./actions.js":176,"./components/Config.js":178,"d3":1,"react":175}],178:[function(require,module,exports){
+},{"./actions.js":176,"./components/Config":187,"d3":1,"react":175}],178:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41124,13 +41124,13 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _SetupForm = require('./SetupForm.js');
+var _moment = require('moment');
 
-var _SetupForm2 = _interopRequireDefault(_SetupForm);
+var _moment2 = _interopRequireDefault(_moment);
 
-var _SubjectList = require('./SubjectList.js');
+var _reactDatepicker = require('react-datepicker');
 
-var _SubjectList2 = _interopRequireDefault(_SubjectList);
+var _reactDatepicker2 = _interopRequireDefault(_reactDatepicker);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -41140,67 +41140,67 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
-var Config = function (_Component) {
-	_inherits(Config, _Component);
+var d3 = require('d3');
 
-	function Config() {
-		_classCallCheck(this, Config);
+var RangeInput = function (_Component) {
+	_inherits(RangeInput, _Component);
 
-		return _possibleConstructorReturn(this, Object.getPrototypeOf(Config).apply(this, arguments));
+	function RangeInput() {
+		_classCallCheck(this, RangeInput);
+
+		return _possibleConstructorReturn(this, Object.getPrototypeOf(RangeInput).apply(this, arguments));
 	}
 
-	_createClass(Config, [{
+	_createClass(RangeInput, [{
 		key: 'render',
 		value: function render() {
 			var _props = this.props;
-			var subjects = _props.subjects;
-			var intervals = _props.intervals;
-			var unit = _props.unit;
 			var range = _props.range;
-			var updateUnit = _props.updateUnit;
 			var updateRange = _props.updateRange;
-			var updateIntervals = _props.updateIntervals;
-			var updateSubjects = _props.updateSubjects;
+			var limitRange = _props.limitRange;
 
+			var start = (0, _moment2.default)(range[0]);
+			var end = (0, _moment2.default)(range[1]);
 			return _react2.default.createElement(
 				'div',
-				{ className: 'config' },
-				_react2.default.createElement(_SetupForm2.default, {
-					unit: unit,
-					range: range,
-					updateUnit: updateUnit,
-					updateRange: updateRange
-				}),
-				_react2.default.createElement(_SubjectList2.default, {
-					intervals: intervals,
-					subjects: subjects,
-					unit: unit,
-					range: range,
-					updateSubjects: updateSubjects,
-					updateIntervals: updateIntervals
-				})
+				{ className: 'range-input' },
+				_react2.default.createElement(_reactDatepicker2.default, {
+					selected: start,
+					startDate: start,
+					endDate: end,
+					minDate: limitRange ? (0, _moment2.default)(limitRange[0]) : null,
+					maxDate: limitRange ? (0, _moment2.default)(limitRange[1]) : null,
+					onChange: function onChange(t) {
+						return updateRange([t.valueOf(), range[1]]);
+					} }),
+				_react2.default.createElement(_reactDatepicker2.default, {
+					selected: end,
+					startDate: start,
+					endDate: end,
+					minDate: limitRange ? (0, _moment2.default)(limitRange[0]) : null,
+					maxDate: limitRange ? (0, _moment2.default)(limitRange[1]) : null,
+					onChange: function onChange(t) {
+						return updateRange([range[0], t.valueOf()]);
+					} })
 			);
 		}
 	}]);
 
-	return Config;
+	return RangeInput;
 }(_react.Component);
 
-exports.default = Config;
+exports.default = RangeInput;
 
 
-Config.propTypes = {
-	intervals: _react.PropTypes.arrayOf(_react.PropTypes.object).isRequired,
-	subjects: _react.PropTypes.arrayOf(_react.PropTypes.object).isRequired,
+RangeInput.propTypes = {
 	unit: _react.PropTypes.oneOf(['day', 'hour', 'minute']).isRequired,
 	range: _react.PropTypes.arrayOf(_react.PropTypes.number).isRequired,
-	updateUnit: _react.PropTypes.func.isRequired,
 	updateRange: _react.PropTypes.func.isRequired,
-	updateSubjects: _react.PropTypes.func.isRequired,
-	updateIntervals: _react.PropTypes.func.isRequired
+	limitRange: _react.PropTypes.array
+
 };
 
-},{"./SetupForm.js":184,"./SubjectList.js":187,"react":175}],179:[function(require,module,exports){
+},{"d3":1,"moment":28,"react":175,"react-datepicker":31}],179:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41284,7 +41284,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _RangeInput = require('./RangeInput.js');
+var _RangeInput = require('../Inputs/RangeInput.js');
 
 var _RangeInput2 = _interopRequireDefault(_RangeInput);
 
@@ -41355,7 +41355,7 @@ IntervalForm.propTypes = {
 	updateIntervals: _react.PropTypes.func.isRequired
 };
 
-},{"./RangeInput.js":183,"react":175}],181:[function(require,module,exports){
+},{"../Inputs/RangeInput.js":178,"react":175}],181:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41524,96 +41524,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _moment = require('moment');
-
-var _moment2 = _interopRequireDefault(_moment);
-
-var _reactDatepicker = require('react-datepicker');
-
-var _reactDatepicker2 = _interopRequireDefault(_reactDatepicker);
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
-var d3 = require('d3');
-
-var RangeInput = function (_Component) {
-	_inherits(RangeInput, _Component);
-
-	function RangeInput() {
-		_classCallCheck(this, RangeInput);
-
-		return _possibleConstructorReturn(this, Object.getPrototypeOf(RangeInput).apply(this, arguments));
-	}
-
-	_createClass(RangeInput, [{
-		key: 'render',
-		value: function render() {
-			var _props = this.props;
-			var range = _props.range;
-			var updateRange = _props.updateRange;
-			var limitRange = _props.limitRange;
-
-			var start = (0, _moment2.default)(range[0]);
-			var end = (0, _moment2.default)(range[1]);
-			return _react2.default.createElement(
-				'div',
-				{ className: 'range-input' },
-				_react2.default.createElement(_reactDatepicker2.default, {
-					selected: start,
-					startDate: start,
-					endDate: end,
-					minDate: limitRange ? (0, _moment2.default)(limitRange[0]) : null,
-					maxDate: limitRange ? (0, _moment2.default)(limitRange[1]) : null,
-					onChange: function onChange(t) {
-						return updateRange([t.valueOf(), range[1]]);
-					} }),
-				_react2.default.createElement(_reactDatepicker2.default, {
-					selected: end,
-					startDate: start,
-					endDate: end,
-					minDate: limitRange ? (0, _moment2.default)(limitRange[0]) : null,
-					maxDate: limitRange ? (0, _moment2.default)(limitRange[1]) : null,
-					onChange: function onChange(t) {
-						return updateRange([range[0], t.valueOf()]);
-					} })
-			);
-		}
-	}]);
-
-	return RangeInput;
-}(_react.Component);
-
-exports.default = RangeInput;
-
-
-RangeInput.propTypes = {
-	unit: _react.PropTypes.oneOf(['day', 'hour', 'minute']).isRequired,
-	range: _react.PropTypes.arrayOf(_react.PropTypes.number).isRequired,
-	updateRange: _react.PropTypes.func.isRequired,
-	limitRange: _react.PropTypes.array
-
-};
-
-},{"d3":1,"moment":28,"react":175,"react-datepicker":31}],184:[function(require,module,exports){
-'use strict';
-
-Object.defineProperty(exports, "__esModule", {
-	value: true
-});
-
-var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-
-var _react = require('react');
-
-var _react2 = _interopRequireDefault(_react);
-
-var _RangeInput = require('./RangeInput.js');
+var _RangeInput = require('./Inputs/RangeInput.js');
 
 var _RangeInput2 = _interopRequireDefault(_RangeInput);
 
@@ -41671,7 +41582,7 @@ SetupForm.propTypes = {
 	updateRange: _react.PropTypes.func.isRequired
 };
 
-},{"./RangeInput.js":183,"react":175}],185:[function(require,module,exports){
+},{"./Inputs/RangeInput.js":178,"react":175}],184:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41684,7 +41595,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _IntervalList = require('./IntervalList.js');
+var _IntervalList = require('../Interval/IntervalList.js');
 
 var _IntervalList2 = _interopRequireDefault(_IntervalList);
 
@@ -41745,7 +41656,7 @@ Subject.propTypes = {
 	toggleEdit: _react.PropTypes.func.isRequired
 };
 
-},{"./IntervalList.js":182,"react":175}],186:[function(require,module,exports){
+},{"../Interval/IntervalList.js":182,"react":175}],185:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41758,7 +41669,7 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _IntervalFormList = require('./IntervalFormList.js');
+var _IntervalFormList = require('../Interval/IntervalFormList.js');
 
 var _IntervalFormList2 = _interopRequireDefault(_IntervalFormList);
 
@@ -41870,7 +41781,7 @@ SubjectForm.propTypes = {
 	toggleEdit: _react.PropTypes.func.isRequired
 };
 
-},{"./IntervalFormList.js":181,"react":175}],187:[function(require,module,exports){
+},{"../Interval/IntervalFormList.js":181,"react":175}],186:[function(require,module,exports){
 'use strict';
 
 Object.defineProperty(exports, "__esModule", {
@@ -41981,7 +41892,96 @@ SubjectList.propTypes = {
 	updateIntervals: _react.PropTypes.func.isRequired
 };
 
-},{"./Subject.js":185,"./SubjectForm.js":186,"react":175}],188:[function(require,module,exports){
+},{"./Subject.js":184,"./SubjectForm.js":185,"react":175}],187:[function(require,module,exports){
+'use strict';
+
+Object.defineProperty(exports, "__esModule", {
+	value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+
+var _react = require('react');
+
+var _react2 = _interopRequireDefault(_react);
+
+var _SetupForm = require('./SetupForm.js');
+
+var _SetupForm2 = _interopRequireDefault(_SetupForm);
+
+var _SubjectList = require('./Subject/SubjectList.js');
+
+var _SubjectList2 = _interopRequireDefault(_SubjectList);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+var Config = function (_Component) {
+	_inherits(Config, _Component);
+
+	function Config() {
+		_classCallCheck(this, Config);
+
+		return _possibleConstructorReturn(this, Object.getPrototypeOf(Config).apply(this, arguments));
+	}
+
+	_createClass(Config, [{
+		key: 'render',
+		value: function render() {
+			var _props = this.props;
+			var subjects = _props.subjects;
+			var intervals = _props.intervals;
+			var unit = _props.unit;
+			var range = _props.range;
+			var updateUnit = _props.updateUnit;
+			var updateRange = _props.updateRange;
+			var updateIntervals = _props.updateIntervals;
+			var updateSubjects = _props.updateSubjects;
+
+			return _react2.default.createElement(
+				'div',
+				{ className: 'config' },
+				_react2.default.createElement(_SetupForm2.default, {
+					unit: unit,
+					range: range,
+					updateUnit: updateUnit,
+					updateRange: updateRange
+				}),
+				_react2.default.createElement(_SubjectList2.default, {
+					intervals: intervals,
+					subjects: subjects,
+					unit: unit,
+					range: range,
+					updateSubjects: updateSubjects,
+					updateIntervals: updateIntervals
+				})
+			);
+		}
+	}]);
+
+	return Config;
+}(_react.Component);
+
+exports.default = Config;
+
+
+Config.propTypes = {
+	intervals: _react.PropTypes.arrayOf(_react.PropTypes.object).isRequired,
+	subjects: _react.PropTypes.arrayOf(_react.PropTypes.object).isRequired,
+	unit: _react.PropTypes.oneOf(['day', 'hour', 'minute']).isRequired,
+	range: _react.PropTypes.arrayOf(_react.PropTypes.number).isRequired,
+	updateUnit: _react.PropTypes.func.isRequired,
+	updateRange: _react.PropTypes.func.isRequired,
+	updateSubjects: _react.PropTypes.func.isRequired,
+	updateIntervals: _react.PropTypes.func.isRequired
+};
+
+},{"./SetupForm.js":183,"./Subject/SubjectList.js":186,"react":175}],188:[function(require,module,exports){
 'use strict';
 
 var _react = require('react');

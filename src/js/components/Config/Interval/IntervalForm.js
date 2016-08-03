@@ -1,5 +1,5 @@
 import React, {Component, PropTypes} from 'react';
-import RangeInput from './RangeInput.js';
+import RangeInput from '../Inputs/RangeInput.js';
 
 export default class IntervalForm extends Component {
 	render() {

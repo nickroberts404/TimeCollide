@@ -1,6 +1,6 @@
 const d3 = require('d3');
 import React, {Component} from 'react';
-import Config from './components/Config.js';
+import Config from './components/Config';
 import Actions from './actions.js';
 
 export default class App extends Component {
