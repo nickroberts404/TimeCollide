@@ -1,0 +1,6 @@
+.app-container {
+	display: flex;
+}
+.display {
+	flex-grow: 1;
+}
