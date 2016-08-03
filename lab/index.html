@@ -26,7 +26,7 @@
 			height: window.innerHeight,
 			width: 150
 		};
-		
+		var svg = d3.select('#viz')
 		var svg = d3.select('#viz').append('svg')
 			.attr('id', 'main-layer')
 			.attr('height', dimensions.height)
@@ -38,15 +38,15 @@
 			d3.select('#main-layer')
 				.attr('height', dimensions.height)
 		}
-		var days = d3.range(30);
+		var days = d3.range(150);
 		var dayScale = d3.scaleLinear().domain([0, days.length]).range(['#F1F2B5', '#135058']);
 		view.selectAll('days')
 			.data(days)
 			.enter()
 			.append('rect')
 			.attr('x', 0)
-			.attr('y', function(d, i){ return i * 40 })
-			.attr('height', 40)
+			.attr('y', function(d, i){ return i * 100 })
+			.attr('height', 100)
 			.attr('width', dimensions.width)
 			.style('stroke', 'white')
 			.style('fill', function(d, i){ return dayScale(i)})
@@ -62,7 +62,7 @@
 		var yd = 0
 		function panned() {
 			if(d3.event.sourceEvent.type === "wheel"){
-				yd = Math.max( Math.min(0, yd + d3.event.sourceEvent.wheelDeltaY), (-1 * (days.length * 40)) + dimensions.height )
+				yd = Math.max( Math.min(0, yd + d3.event.sourceEvent.wheelDeltaY), (-1 * (days.length * 100)) + dimensions.height )
 				view.attr('transform', 'translate(0, '+yd+')');
 			}
 		}
