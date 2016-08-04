@@ -44944,19 +44944,19 @@ var Bar = function (_Component) {
 			var bar = _reactFauxDom2.default.createElement('svg');
 			var svg = d3.select(bar).attr('height', height).attr('width', width);
 			var view = svg.append('g').attr('class', 'bar-view');
-
-			var scale = d3.scaleTime().domain([new Date(range[0]), new Date(range[1])]).range([0, height]);
+			var domain = [new Date(range[0]), endOf(range[1])];
+			var scale = d3.scaleTime().domain(domain).range([0, height]);
 			var axis = d3.axisRight().scale(scale).tickSize(width).ticks(d3.timeDay);
 
 			view.selectAll('.blocks').data(intervals).enter().append('rect').attr('y', function (i) {
 				return scale(i.range[0]);
 			}).attr('width', width).attr('height', function (i) {
-				return scale(i.range[1]) - scale(i.range[0]);
+				return scale(endOf(i.range[1])) - scale(i.range[0]);
 			}).attr('class', 'blocks').style('opacity', 0.1);
 
 			var ya = view.append('g').attr('class', 'y-axis').call(axis);
 
-			ya.selectAll('text').attr('x', 4).attr("dy", -4);
+			ya.selectAll('text').attr('x', 4).attr("dy", 10);
 
 			return bar.toReact();
 		}
@@ -44965,14 +44965,18 @@ var Bar = function (_Component) {
 	return Bar;
 }(_react.Component);
 
+exports.default = Bar;
+
+
+function endOf(time) {
+	return d3.timeDay.floor(d3.timeDay.offset(new Date(time), 1));
+}
+
 // Bar.propTypes = {
 // 	intervals: PropTypes.arrayOf(PropTypes.object).isRequired,
 // 	subjects: PropTypes.arrayOf(PropTypes.object).isRequired,
 // 	range: PropTypes.arrayOf(PropTypes.number).isRequired,
 // }
-
-
-exports.default = Bar;
 
 },{"d3":1,"react":190,"react-faux-dom":38}],205:[function(require,module,exports){
 'use strict';

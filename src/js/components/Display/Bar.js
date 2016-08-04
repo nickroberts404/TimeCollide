@@ -11,8 +11,8 @@ export default class Bar extends Component {
 			.attr('width', width)
 		let view = svg.append('g')
 			.attr('class', 'bar-view')
-
-		const scale = d3.scaleTime().domain([new Date(range[0]), new Date(range[1])]).range([0, height]);
+		const domain = [new Date(range[0]), endOf(range[1])];
+		const scale = d3.scaleTime().domain(domain).range([0, height]);
 		const axis = d3.axisRight()
 			.scale(scale)
 			.tickSize(width)
@@ -24,7 +24,7 @@ export default class Bar extends Component {
 			.append('rect')
 			.attr('y', i => scale(i.range[0]))
 			.attr('width', width)
-			.attr('height', i => scale(i.range[1]) - scale(i.range[0]))
+			.attr('height', i => scale(endOf(i.range[1])) - scale(i.range[0]))
 			.attr('class', 'blocks')
 			.style('opacity', 0.1)
 
@@ -34,10 +34,14 @@ export default class Bar extends Component {
 
 		ya.selectAll('text')
 			.attr('x', 4)
-    		.attr("dy", -4);
+    		.attr("dy", 10);
 
 		return bar.toReact();
 	}
+}
+
+function endOf(time) {
+	return d3.timeDay.floor(d3.timeDay.offset(new Date(time), 1))
 }
 
 // Bar.propTypes = {
