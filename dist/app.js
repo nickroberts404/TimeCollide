@@ -44941,10 +44941,19 @@ var Bar = function (_Component) {
 			var height = _props.height;
 			var width = _props.width;
 
+			console.log(intervals);
 			var bar = _reactFauxDom2.default.createElement('svg');
 
 			var svg = d3.select(bar).attr('height', height).attr('width', width);
-			svg.append('g').attr('class', 'bar-view');
+			var view = svg.append('g').attr('class', 'bar-view');
+			var scale = d3.scaleLinear().domain([range[0], range[1]]).range([0, height]);
+			console.log(scale(1470200400000));
+			view.selectAll('.blocks').data(intervals).enter().append('rect').attr('y', function (i) {
+				return scale(i.range[0]);
+			}).attr('width', width).attr('height', function (i) {
+				return scale(i.range[1]) - scale(i.range[0]);
+			}).attr('class', 'blocks').style('opacity', 0.1);
+
 			return bar.toReact();
 		}
 	}]);
