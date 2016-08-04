@@ -44956,8 +44956,8 @@ var Bar = function (_Component) {
 
 			var ya = view.append('g').attr('class', 'y-axis').call(axis);
 
-			ya.selectAll('text').attr('x', 4).attr("dy", 10);
-
+			ya.selectAll('text').attr('x', 4).attr("dy", 12);
+			ya.select('line:first-child').style('display', 'none');
 			return bar.toReact();
 		}
 	}]);

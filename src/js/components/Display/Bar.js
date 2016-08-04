@@ -34,8 +34,8 @@ export default class Bar extends Component {
 
 		ya.selectAll('text')
 			.attr('x', 4)
-    		.attr("dy", 10);
-
+    		.attr("dy", 12);
+		ya.select('line:first-child').style('display', 'none');
 		return bar.toReact();
 	}
 }

@@ -10,6 +10,13 @@ svg {
 	margin-left: 150px;
 }
 .blocks {
-	fill: purple;
+	fill: red;
+}
 
+.y-axis path{
+	display: none;
+}
+.y-axis line {
+	stroke: #333;
+	stroke-width: 0.5;
 }
