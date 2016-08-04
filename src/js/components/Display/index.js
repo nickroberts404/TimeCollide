@@ -27,7 +27,7 @@ export default class Display extends Component {
 					subjects={subjects}
 					range={range}
 					height={height}
-					width={70}
+					width={100}
 				/>
 			</div>
 		);

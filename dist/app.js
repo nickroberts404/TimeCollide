@@ -44946,13 +44946,16 @@ var Bar = function (_Component) {
 
 			var svg = d3.select(bar).attr('height', height).attr('width', width);
 			var view = svg.append('g').attr('class', 'bar-view');
-			var scale = d3.scaleLinear().domain([range[0], range[1]]).range([0, height]);
+			var scale = d3.scaleTime().domain([new Date(range[0]), new Date(range[1])]).range([0, height]);
+			var axis = d3.axisRight().scale(scale).ticks(10);
+
 			console.log(scale(1470200400000));
 			view.selectAll('.blocks').data(intervals).enter().append('rect').attr('y', function (i) {
 				return scale(i.range[0]);
 			}).attr('width', width).attr('height', function (i) {
 				return scale(i.range[1]) - scale(i.range[0]);
 			}).attr('class', 'blocks').style('opacity', 0.1);
+			view.append('g').attr('class', 'y-axis').call(axis);
 
 			return bar.toReact();
 		}
@@ -45038,7 +45041,7 @@ var Display = function (_Component) {
 					subjects: subjects,
 					range: range,
 					height: height,
-					width: 70
+					width: 100
 				})
 			);
 		}

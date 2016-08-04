@@ -13,7 +13,11 @@ export default class Bar extends Component {
 			.attr('width', width)
 		let view = svg.append('g')
 			.attr('class', 'bar-view')
-		const scale = d3.scaleLinear().domain([range[0], range[1]]).range([0, height]);
+		const scale = d3.scaleTime().domain([new Date(range[0]), new Date(range[1])]).range([0, height]);
+		const axis = d3.axisRight()
+			.scale(scale)
+			.ticks(10)
+
 		console.log(scale(1470200400000));
 		view.selectAll('.blocks')
 			.data(intervals)
@@ -24,6 +28,9 @@ export default class Bar extends Component {
 			.attr('height', i => scale(i.range[1]) - scale(i.range[0]))
 			.attr('class', 'blocks')
 			.style('opacity', 0.1)
+		view.append('g')
+			.attr('class', 'y-axis')
+			.call(axis)
 
 		return bar.toReact();
 	}
