@@ -17,8 +17,7 @@ export default class Bar extends Component {
 		const axis = d3.axisRight()
 			.scale(scale)
 			.ticks(10)
-
-		console.log(scale(1470200400000));
+			
 		view.selectAll('.blocks')
 			.data(intervals)
 			.enter()

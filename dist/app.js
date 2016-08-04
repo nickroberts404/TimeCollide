@@ -44949,7 +44949,6 @@ var Bar = function (_Component) {
 			var scale = d3.scaleTime().domain([new Date(range[0]), new Date(range[1])]).range([0, height]);
 			var axis = d3.axisRight().scale(scale).ticks(10);
 
-			console.log(scale(1470200400000));
 			view.selectAll('.blocks').data(intervals).enter().append('rect').attr('y', function (i) {
 				return scale(i.range[0]);
 			}).attr('width', width).attr('height', function (i) {
