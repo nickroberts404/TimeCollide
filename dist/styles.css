@@ -1,6 +1,11 @@
+*, *:after, *:before {padding: 0; margin: 0; box-sizing: border-box;}
 .app-container {
 	display: flex;
 }
 .display {
 	flex-grow: 1;
+}
+svg {
+	border: 1px solid #eee;
+	margin-left: 150px;
 }

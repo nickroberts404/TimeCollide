@@ -51,7 +51,11 @@ export default class App extends Component {
 		const {intervals, subjects, unit, range} = this.state;
 		return (
 			<div className="app-container">
-				<Display />
+				<Display 
+					intervals={intervals}
+					subjects={subjects}
+					range={range}
+				/>
 				<Config
 					intervals={intervals}
 					subjects={subjects}
@@ -61,7 +65,7 @@ export default class App extends Component {
 					updateRange={this.updateRange.bind(this)}
 					updateSubjects={this.updateSubjects.bind(this)}
 					updateIntervals={this.updateIntervals.bind(this)}
-					/>
+				/>
 			</div>
 		)
 
