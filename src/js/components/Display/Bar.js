@@ -16,7 +16,7 @@ export default class Bar extends Component {
 		const axis = d3.axisRight()
 			.scale(scale)
 			.tickSize(width)
-			.ticks(d3.timeDay);
+			.tickFormat(d3.timeFormat('%b %d'));
 			
 		view.selectAll('.blocks')
 			.data(intervals)

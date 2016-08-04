@@ -44946,7 +44946,7 @@ var Bar = function (_Component) {
 			var view = svg.append('g').attr('class', 'bar-view');
 			var domain = [new Date(range[0]), endOf(range[1])];
 			var scale = d3.scaleTime().domain(domain).range([0, height]);
-			var axis = d3.axisRight().scale(scale).tickSize(width).ticks(d3.timeDay);
+			var axis = d3.axisRight().scale(scale).tickSize(width).tickFormat(d3.timeFormat('%b %d'));
 
 			view.selectAll('.blocks').data(intervals).enter().append('rect').attr('y', function (i) {
 				return scale(i.range[0]);

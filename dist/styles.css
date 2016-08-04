@@ -10,10 +10,10 @@ svg {
 	margin-left: 150px;
 }
 .blocks {
-	fill: red;
+	fill: purple;
 }
 
-.y-axis path{
+.y-axis path {
 	display: none;
 }
 .y-axis line {
