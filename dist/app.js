@@ -44941,20 +44941,22 @@ var Bar = function (_Component) {
 			var height = _props.height;
 			var width = _props.width;
 
-			console.log(intervals);
 			var bar = _reactFauxDom2.default.createElement('svg');
-
 			var svg = d3.select(bar).attr('height', height).attr('width', width);
 			var view = svg.append('g').attr('class', 'bar-view');
+
 			var scale = d3.scaleTime().domain([new Date(range[0]), new Date(range[1])]).range([0, height]);
-			var axis = d3.axisRight().scale(scale).ticks(10);
+			var axis = d3.axisRight().scale(scale).tickSize(width).ticks(d3.timeDay);
 
 			view.selectAll('.blocks').data(intervals).enter().append('rect').attr('y', function (i) {
 				return scale(i.range[0]);
 			}).attr('width', width).attr('height', function (i) {
 				return scale(i.range[1]) - scale(i.range[0]);
 			}).attr('class', 'blocks').style('opacity', 0.1);
-			view.append('g').attr('class', 'y-axis').call(axis);
+
+			var ya = view.append('g').attr('class', 'y-axis').call(axis);
+
+			ya.selectAll('text').attr('x', 4).attr("dy", -4);
 
 			return bar.toReact();
 		}
