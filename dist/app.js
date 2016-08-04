@@ -43889,14 +43889,19 @@ var deleteSubject = function deleteSubject(subjects, id) {
 		return s.id !== id;
 	});
 };
-
+var deleteSubjectIntervals = function deleteSubjectIntervals(intervals, subjectId) {
+	return intervals.filter(function (i) {
+		return i.subjectId !== subjectId;
+	});
+};
 exports.default = {
 	createInterval: createInterval,
 	updateInterval: updateInterval,
 	deleteInterval: deleteInterval,
 	createSubject: createSubject,
 	updateSubject: updateSubject,
-	deleteSubject: deleteSubject
+	deleteSubject: deleteSubject,
+	deleteSubjectIntervals: deleteSubjectIntervals
 };
 
 },{}],193:[function(require,module,exports){
@@ -43980,23 +43985,28 @@ var App = function (_Component) {
 	}, {
 		key: 'updateSubjects',
 		value: function updateSubjects(action) {
-			var subjects = this.state.subjects;
+			var _state = this.state;
+			var intervals = _state.intervals;
+			var subjects = _state.subjects;
+
 			if (action.type === 'create') {
 				this.setState({ subjects: _actions2.default.createSubject(subjects, action.subject) });
 			} else if (action.type === 'update') {
 				this.setState({ subjects: _actions2.default.updateSubject(subjects, action.id, action.toUpdate) });
 			} else if (action.type === 'delete') {
-				this.setState({ subjects: _actions2.default.deleteSubject(subjects, action.id) });
+				console.log('HEYY');
+				this.setState({ subjects: _actions2.default.deleteSubject(subjects, action.id),
+					intervals: _actions2.default.deleteSubjectIntervals(intervals, action.id) });
 			}
 		}
 	}, {
 		key: 'render',
 		value: function render() {
-			var _state = this.state;
-			var intervals = _state.intervals;
-			var subjects = _state.subjects;
-			var unit = _state.unit;
-			var range = _state.range;
+			var _state2 = this.state;
+			var intervals = _state2.intervals;
+			var subjects = _state2.subjects;
+			var unit = _state2.unit;
+			var range = _state2.range;
 
 			return _react2.default.createElement(
 				'div',
@@ -44947,7 +44957,6 @@ var Bar = function (_Component) {
 			var svg = d3.select(bar).attr('height', height).attr('width', width);
 			var view = svg.append('g').attr('class', 'bar-view');
 			var scale = d3.scaleLinear().domain([range[0], range[1]]).range([0, height]);
-			console.log(scale(1470200400000));
 			view.selectAll('.blocks').data(intervals).enter().append('rect').attr('y', function (i) {
 				return scale(i.range[0]);
 			}).attr('width', width).attr('height', function (i) {

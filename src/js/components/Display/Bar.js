@@ -14,7 +14,6 @@ export default class Bar extends Component {
 		let view = svg.append('g')
 			.attr('class', 'bar-view')
 		const scale = d3.scaleLinear().domain([range[0], range[1]]).range([0, height]);
-		console.log(scale(1470200400000));
 		view.selectAll('.blocks')
 			.data(intervals)
 			.enter()

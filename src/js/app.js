@@ -37,13 +37,15 @@ export default class App extends Component {
 	}
 
 	updateSubjects(action) {
-		const subjects = this.state.subjects;
+		const {intervals, subjects} = this.state;
 		if (action.type === 'create') {
 			this.setState({subjects: Actions.createSubject(subjects, action.subject)});
 		} else if (action.type === 'update') {
 			this.setState({subjects: Actions.updateSubject(subjects, action.id, action.toUpdate)});
 		} else if (action.type === 'delete') {
-			this.setState({subjects: Actions.deleteSubject(subjects, action.id)});
+			console.log('HEYY');
+			this.setState({subjects: Actions.deleteSubject(subjects, action.id), 
+				intervals: Actions.deleteSubjectIntervals(intervals, action.id)});
 		}
 	}
 
